@@ -1,44 +1,43 @@
-<!doctype html>
-<html lang="es-MX">
-    <head>
-        <title>Title</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
+@extends('layout.app')
 
-        <!-- Bootstrap CSS v5.2.1 -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous"
-        />
-    </head>
+@section('content')
+    <x-regla />
+    <div style="height: 20px"></div>
 
-    <body>
-        <header>
-            <!-- place navbar here -->
-        </header>
-        <main>
-            <h1>crear tickets</h1>
-        </main>
-        <footer>
-            <!-- place footer here -->
-        </footer>
-        <!-- Bootstrap JavaScript Libraries -->
-        <script
-            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-            crossorigin="anonymous"
-        ></script>
+    <div class="container formulrio">
+        <div class="row justify-content-center align-items-center g-2">
+            <div class="col">
+                <h1>¿Tienes problemas? </h1>
+            </div>
+            <div class="mb-3">
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>¿Que esta fallando?</option>
+                    <option value="PC">PC</option>
+                    <option value="CONEXION">CONEXION</option>
+                    <option value="ACCESORIOS">ACCESORIOS DE PC</option>
+                    <option value="CUENTAS">CUENTAS</option>
+                    <option value="SERVIDOR">SERVIDOR</option>
+                    <option value="OTROS">OTROS</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="ta-descripcion" class="form-label">Describenos tu falla</label>
+                <textarea class="form-control" name="ta-descripcion" id="ta-descripcion" rows="3"></textarea>
+            </div>
 
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-            crossorigin="anonymous"
-        ></script>
-    </body>
-</html>
+
+
+            <a name="enviar" id="enviar" class="btn btn-primary " href="#" role="button">
+                Enviar
+            </a>
+
+        </div>
+
+
+
+
+
+    </div>
+
+    </div>
+@endsection
