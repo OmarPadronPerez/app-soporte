@@ -12,7 +12,7 @@
                 <a class="nav-link" href="/nuevo">Nuevo</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/tickets">Tikets</a>
+                <a class="nav-link active" aria-current="page" href="/tickets">Tickets</a>
               </li>
               
               <li class="nav-item">
