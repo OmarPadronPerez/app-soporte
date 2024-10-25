@@ -19,7 +19,7 @@
                     <label for="" class="form-label">
                         <h3>Diagnostico tecnico</h3>
                     </label>
-                    <textarea class="form-control" name="" id="" rows="3"></textarea>
+                    <textarea class="form-control" name="diagnostico" id="diagnostico" rows="3"></textarea>
                 </div>
 
             </div>
