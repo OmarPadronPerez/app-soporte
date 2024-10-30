@@ -8,7 +8,7 @@
 
             </div>
             <div class="col-12 col-md-3 tipo">
-                <h6>Tipo: urgente</h6>
+                <h6>Gravedad: urgente</h6>
             </div>
         </div>
 

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('Estado');
             $table->integer('Usuario_resuelto');
             $table->integer('urgencia');
+            $table->string('foto');
             $table->timestamp('fecha_creacion')->useCurrent();
             $table->timestamp('fecha_resuelto')->useCurrent();
 

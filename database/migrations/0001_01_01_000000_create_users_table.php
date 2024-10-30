@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('password');
-            $table->string('tipo');
+            $table->boolean('tipo');
             $table->rememberToken();
             $table->timestamps();
         });

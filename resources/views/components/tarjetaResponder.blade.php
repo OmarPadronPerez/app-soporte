@@ -3,7 +3,7 @@
         <h4>Titulo</h4>
         <div class="mb-3">
             <label for="" class="form-label">
-                <h5>Urgencia</h5>
+                <h5>Gravedad</h5>
             </label>
             <select class="form-select form-select-lg" name="" id="">
                 <option value="" selected>Normal</option>
