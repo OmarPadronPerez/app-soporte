@@ -9,6 +9,7 @@
 
             <div class="col-12">
                 @for ($x = 0; $x < 3; $x++)
+                    
                     <x-tarjeta />
                     <div class="espacio" style="height: 15px"></div>
                 @endfor

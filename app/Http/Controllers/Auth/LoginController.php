@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -19,12 +21,17 @@ class LoginController extends Controller
         $credentials = [
             "name" => $request->name,
             "password" => $request->password,
+            
         ];
         //return $credentials;
         if (Auth::attempt($credentials)) {
 
-            //$request->session()->regenerate();
+            $request->session()->regenerate();
             //return "si";
+            Session::put('user', $credentials['name']);
+            Session::put('tipo', DB::table('users')->where('name', $credentials['name'])->value('tipo'));
+            Session::put('id', DB::table('users')->where('name', $credentials['name'])->value('id'));
+            
             return redirect('/nuevo');
         } else {
             //return "no";

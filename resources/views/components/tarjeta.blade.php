@@ -1,3 +1,6 @@
+@props(['tInfo']);
+
+
 <div class="card ">
     <div class="container">
         <div class="row justify-content-between align-items-center card-header">

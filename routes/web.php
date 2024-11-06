@@ -1,9 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\historialController;
 use App\Http\Controllers\nuevoUsuarioController;
-use App\Http\Controllers\responderController;
 use App\Http\Controllers\TicketsController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,8 +14,10 @@ Route::GET('/logout',[LoginController::class, 'logout'])->name('logout');
 Route::GET('tickets',[TicketsController::class, 'verTickets']);
 Route::GET('tickets/{id}',[TicketsController::class, 'verTicketid']);
 Route::GET('/nuevo',[TicketsController::class, 'crearTicket']);
+Route::POST('/nuevo/envtkt',[TicketsController::class, 'store'])->name('ticket.store');
 Route::GET('historial',[TicketsController::class,'historialTicket']);
-Route::GET('responder',[TicketsController::class,'responderTicket']);
+Route::GET('responder/{id}',[TicketsController::class,'responderTicket']);
+Route::GET('responder/{id}/actick',[TicketsController::class,'guardarTicket']);
 
 Route::get('nuevoUsuario',[nuevoUsuarioController::class,'index']);
 Route::POST('nuevoUsuario/nsStorage',[nuevoUsuarioController::class,'store'])->name('usuario.store');

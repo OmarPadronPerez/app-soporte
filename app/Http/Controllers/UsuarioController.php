@@ -12,8 +12,9 @@ class nuevoUsuarioController extends Controller
     }
 
     public function store(Request $request){
-        $datos=$request->all();
         User::create($request->all());
-        return response()->json($datos);
+        return url('login');
+        //return response()->json($datos);
     }
+    
 }
