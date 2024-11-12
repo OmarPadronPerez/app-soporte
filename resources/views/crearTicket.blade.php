@@ -18,11 +18,11 @@
                 <select name="falla" id="falla" class="form-select" aria-label="Default select example">
                     
                     <option value="PC">MI PC</option>
-                    <option value="CONEXION">LA CONEXION</option>
-                    <option value="ACCESORIOS">UN ACCESORIO DE MI PC</option>
-                    <option value="APLICACIONES">UNA APLICACION</option>
-                    <option value="SERVIDOR">EL SERVIDOR</option>
-                    <option value="OTROS">OTRO</option>
+                    <option value="Conexion">LA CONEXION</option>
+                    <option value="Accesorios">UN ACCESORIO DE MI PC</option>
+                    <option value="Aplicaciones">UNA APLICACION</option>
+                    <option value="Servidor">EL SERVIDOR</option>
+                    <option value="Otros">OTRA COSA</option>
                 </select>
             </div>
             <div class="mb-3">
@@ -37,7 +37,7 @@
 
             <div class="mb-3">
                 <label for="" class="form-label">
-                    <h3>Evidencia</h3>
+                    <h3>Muestranos un poco mas</h3>
                 </label>
                 <br>
                 <input name="foto" type="file" name="foto" id="foto">

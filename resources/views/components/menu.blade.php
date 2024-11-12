@@ -25,7 +25,7 @@
                   Hola {{Session::get('user')}} 
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Cerrar sesion</a></li>
+                  <li><a class="dropdown-item" href="/logout">Cerrar sesion</a></li>
                 </span>
           </div>
         </div>
