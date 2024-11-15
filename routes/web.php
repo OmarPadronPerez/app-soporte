@@ -18,10 +18,9 @@ Route::GET('tickets',[TicketsController::class, 'verTickets']);
 Route::GET('tickets/{id}',[TicketsController::class, 'verTicketsid']);
 
 Route::GET('historial',[TicketsController::class,'historialTicket']);
-Route::GET('completo/{id}',[TicketsController::class, 'completo']);
+Route::GET('completo/{id}',[TicketsController::class, 'verTicketCompleto']);
 
-Route::GET('responder',[TicketsController::class,'responderTicket']);
-Route::POST('responder/{id}/actick',[TicketsController::class,'guardarTicket']);
+Route::POST('/tckActualizar',[TicketsController::class,'actualizar'])->name('tckActualizar');
 
 Route::get('nuevoUsuario',[UsuarioController::class,'index']);
 Route::POST('nuevoUsuario/nsStorage',[UsuarioController::class,'store'])->name('usuario.store');

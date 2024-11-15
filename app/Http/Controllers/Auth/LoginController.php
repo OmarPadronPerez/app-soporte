@@ -35,15 +35,8 @@ class LoginController extends Controller
             ->where('name', $credentials['name'])
             ->get();
 
-            /*return  $datos[0]['id'];
-            Session::put('tipo', $datos['tipo']);
-            Session::put('id', $datos['id']);*/
-
-            //return Session::get('id');
-
-            Session::put('tipo', DB::table('users')->where('name', $credentials['name'])->value('tipo'));
-            Session::put('id', DB::table('users')->where('name', $credentials['name'])->value('id'));
-            
+            Session::put('tipo', $datos[0]->tipo);
+            Session::put('id', $datos[0]->id);
             return redirect('/nuevo');
         } else {
             //return "no";

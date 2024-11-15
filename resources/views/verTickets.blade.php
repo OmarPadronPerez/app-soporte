@@ -9,6 +9,7 @@
     }
 </style>
 
+{{$datos}}
 @section('content')
     <div class="container principal">
         <div class="row justify-content-center align-items-center g-2">
@@ -17,12 +18,18 @@
             </div>
 
             <div class="col-12 ">
+                {{
+                    if($dato->created_at!=null)
+                        $dato->created_at=null;
+                    
+                }}
                 @foreach ($datos as $dato)
-                    <x-tarjeta>
-                        @slot('id',$dato->id)
-                        @slot('falla', $dato->falla)
-                        @slot('descripcion',$dato->Detalles)
-
+                    <x-tarjeta> 
+                        @isset(slot('id',$dato->id))
+                        @slot('fCreacion',$dato->created_at)
+                        @slot('Falla', $dato->Falla)
+                        @slot('Descripcion',$dato->Detalles)
+                        @slot('redirigir','tickets/'.$dato->id)
                     </x-tarjeta>
                 @endforeach
 

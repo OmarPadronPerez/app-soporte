@@ -14,16 +14,16 @@ return new class extends Migration
         //
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->integer('user');
-            $table->string('falla');
+            $table->integer('User');
+            $table->string('Falla');
             $table->string('Detalles');
-            $table->string('Estado');
-            $table->integer('Usuario_resuelto');
-            $table->integer('urgencia');
-            $table->string('foto');
+            $table->integer('Usuario_resuelto')->nullable();
+            $table->string('Diagnostico')->nullable();
+            $table->string('Urgencia')->nullable();
+            $table->string('Foto')->nullable();
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('update_at')->useCurrent();
-            $table->timestamp('fecha_resuelto');
+            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('fecha_resuelto')->nullable();
             
         });
     }

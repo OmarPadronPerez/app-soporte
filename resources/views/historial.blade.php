@@ -4,15 +4,22 @@
     <div class="container">
         <div class="row justify-content-center align-items-center g-2">
             <div class="col-12">
-                <h2>Todos tus tickets</h2>
+                <h2>Historial</h2>
             </div>
-
             <div class="col-12">
-                @for ($x = 0; $x < 3; $x++)
-                    
-                    <x-tarjeta />
-                    <div class="espacio" style="height: 15px"></div>
-                @endfor
+                @foreach ($datos as $dato)
+                    <x-tarjeta>
+                        @slot('id',$dato->id)
+                        @slot('fCreacion',$dato->created_at)
+                        @slot('fCierre',$dato->fecha_resuelto)
+                        @slot('Falla', $dato->Falla)
+                        @slot('Descripcion',$dato->Detalles)
+                        @slot('redirigir','completo/'.$dato->id)
+
+                    </x-tarjeta>
+                    <br>
+                @endforeach
+                
             </div>
         </div>
     </div>

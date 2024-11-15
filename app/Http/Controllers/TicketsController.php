@@ -11,42 +11,52 @@ class TicketsController extends Controller
 {
     public function verTickets()
     {
-        $datos = DB::table('tickets')
-            ->select('falla', 'Detalles', 'id')
-            ->where('user', Session::get('id'))
-            ->where('fecha_resuelto', NULL)
-            ->get();
-
+        if (Session::get('tipo') == 1) {
+            $datos = DB::table('tickets')
+                ->select('Falla', 'Detalles', 'id')
+                ->where('fecha_resuelto', NULL)
+                ->get();
+        } else {
+            $datos = DB::table('tickets')
+                ->select('Falla', 'Detalles', 'id')
+                ->where('user', Session::get('id'))
+                ->where('fecha_resuelto', NULL)
+                ->get();
+        }
         return view('verTickets')->with('datos', $datos);
     }
     public function verTicketsid($id)
     {
-        //return 'verTicketsid '.$id;
-        //return redirect()->route('responder');
-        //return view('responder');
         $datos = DB::table('tickets')
             ->where('id', $id)
             ->get();
-        //return $dato;
-
         if (Session::get('tipo') == 1) { //si es administrador lleva a editar
-            //return view('responder')->$datos;
-            //return view('responder', ['dato' => $dato]);
             return view('responder')->with('datos', $datos);
         } else { //si es usuario estandar te redirige a solo ver
-            return 'otro';
-            //return view('verTickets',['id'=>$id]);
+            //return 'otro';
+            return view('verTickets')->with('datos', $datos);
         }
     }
 
 
     public function crearTicket()
     {
-        return view('crearTicket');
+        if (Session::get('tipo') == 1) {
+
+            $datos = DB::table('users')
+                ->select('id', 'name')
+                ->get();
+            return view('crearTicket')->with('datos', $datos);
+        } else {
+            return view('crearTicket');
+        }
     }
     public function historialTicket()
     {
-        return view('historial');
+        $datos = DB::table('tickets')
+            ->where('fecha_resuelto', "!=", NULL)
+            ->get();
+        return view('historial')->with('datos', $datos);
     }
 
     /*public function responderTicket($id){
@@ -59,17 +69,47 @@ class TicketsController extends Controller
         return view('responder')->$datos;
     }*/
 
-    public function guardarTicket(Request $request)
-    {
-        $datos = $request->all(); //buscar solo actualizar lo que se agrego
-        return view('historial');
-    }
     public function store(Request $request)
     {
         $datos = $request->all();
-        //return $datos;
+        if (Session::get('tipo') == 1) {
+            $datos['User'] = $datos['usuario2'];
+        }
         Ticket::create($datos);
-        //return response()->json($datos);
-        return view('tickets');
+        return redirect('tickets');
+    }
+    public function actualizar(Request $request)
+    {
+        $datos = $request->all();
+        $now = new \DateTime();
+        //return $datos;
+
+        if ($datos['Estado'] == 'Concluido') {
+            DB::table('tickets')
+                ->where('id', $datos['id'])
+                ->update([
+                    'Usuario_resuelto' => Session::get('id'),
+                    'Diagnostico' => $datos['Diagnostico'],
+                    'urgencia' => $datos['prioridad'],
+                    'fecha_resuelto' => $now,
+                    'updated_at' => $now
+                ]);
+        } else {
+            DB::table('tickets')
+                ->where('id', $datos['id'])
+                ->update([
+                    'Diagnostico' => $datos['Diagnostico'],
+                    'urgencia' => $datos['prioridad'],
+                    'updated_at' => $now
+                ]);
+        }
+        return url('historialTicket');
+    }
+    public function verTicketCompleto($id)
+    {
+        $datos = DB::table('tickets')
+            ->where('id', $id)
+            ->get();
+        return view('completo')->with('datos', $datos);
     }
 }
