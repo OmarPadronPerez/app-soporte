@@ -1,8 +1,5 @@
-<style>
-    a{
-        text-decoration: none;
-    }
-</style>
+<link type="text/css" href="{{ asset('css/estilos.css') }}" rel="stylesheet">
+
 
 
 <a href="{{ url($redirigir) }}" class="card ">
@@ -18,10 +15,10 @@
             <div class="col-12 col-md-3 tipo">
                 <h6>Gravedad: urgente</h6>
             </div>-->
-            <div class="col-12 col-md-2 estado">
+            <div class="col-12 col-md-5 estado">
                 <h5 class="card-text">
                     <b>Estado:</b>
-                    @if ($fCierre)
+                    @if (isset($fCierre))
                         Cerrado
                     @else
                         En revision
@@ -33,15 +30,16 @@
         <div class="row justify-content-between align-items-center card-header">
             <div class="col-12 col-md-5">
                 <h5>
-                    <b>Creacion: </b>{{$fCreacion}}
+                    <b>Creacion: </b>{{date('d/M/y H:i:s', strtotime($fCreacion))}}
+                    
                 </h5>
 
             </div>  
             <div class="col-12 col-md-5 estado">
                 <h5 class="card-text">
-                    <b>Cierre: </b>
-                    @if ($fCierre!=null)
-                        {{$fCierre}}
+                    @if (isset($fCierre))
+                        <b>Cierre: </b>
+                        {{date('d/M/y H:i:s', strtotime($fCierre))}}
                     @endif
                     
                 </h5>

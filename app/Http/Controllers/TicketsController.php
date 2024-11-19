@@ -13,14 +13,14 @@ class TicketsController extends Controller
     {
         if (Session::get('tipo') == 1) {
             $datos = DB::table('tickets')
-                ->select('Falla', 'Detalles', 'id')
                 ->where('fecha_resuelto', NULL)
+                ->orderBy('created_at', 'asc')
                 ->get();
         } else {
             $datos = DB::table('tickets')
-                ->select('Falla', 'Detalles', 'id')
-                ->where('user', Session::get('id'))
+                ->where('Creador_id', Session::get('id'))
                 ->where('fecha_resuelto', NULL)
+                ->orderBy('created_at', 'asc')
                 ->get();
         }
         return view('verTickets')->with('datos', $datos);
@@ -55,6 +55,7 @@ class TicketsController extends Controller
     {
         $datos = DB::table('tickets')
             ->where('fecha_resuelto', "!=", NULL)
+            ->orderBy('fecha_resuelto', 'desc')
             ->get();
         return view('historial')->with('datos', $datos);
     }
@@ -73,11 +74,12 @@ class TicketsController extends Controller
     {
         $datos = $request->all();
         if (Session::get('tipo') == 1) {
-            $datos['User'] = $datos['usuario2'];
+            $datos['Creador_id'] = $datos['usuario2'];
         }
         Ticket::create($datos);
         return redirect('tickets');
     }
+
     public function actualizar(Request $request)
     {
         $datos = $request->all();
@@ -88,7 +90,7 @@ class TicketsController extends Controller
             DB::table('tickets')
                 ->where('id', $datos['id'])
                 ->update([
-                    'Usuario_resuelto' => Session::get('id'),
+                    'resuelto_id' => Session::get('id'),
                     'Diagnostico' => $datos['Diagnostico'],
                     'urgencia' => $datos['prioridad'],
                     'fecha_resuelto' => $now,
@@ -103,8 +105,9 @@ class TicketsController extends Controller
                     'updated_at' => $now
                 ]);
         }
-        return url('historialTicket');
+        return redirect('historialTicket');
     }
+
     public function verTicketCompleto($id)
     {
         $datos = DB::table('tickets')

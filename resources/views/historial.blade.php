@@ -1,10 +1,12 @@
 @extends('layout.app')
 
+<link type="text/css" href="{{ asset('css/estilos.css') }}" rel="stylesheet">
+
 @section('content')
-    <div class="container">
+    <div class="container principal">
         <div class="row justify-content-center align-items-center g-2">
             <div class="col-12">
-                <h2>Historial</h2>
+                <h2>Tu Historial</h2>
             </div>
             <div class="col-12">
                 @foreach ($datos as $dato)

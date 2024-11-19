@@ -12,6 +12,7 @@ class UsuarioController extends Controller
     }
 
     public function store(Request $request){
+        $request['name_user']=strtoupper($request['name_user']);
         User::create($request->all());
         return url('login');
         //return response()->json($datos);

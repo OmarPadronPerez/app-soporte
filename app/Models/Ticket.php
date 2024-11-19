@@ -12,10 +12,10 @@ class Ticket extends Model
     protected $table = 'tickets';
     protected $fillable = [
         'id', 
-        'User', 
+        'Creador_id', 
         'Falla',
         'Detalles',
-        'Usuario_resuelto',
+        'resuelto_id',
         'Diagnostico',
         'Urgencia',
         'Foto',
@@ -24,4 +24,8 @@ class Ticket extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function usuario (){
+        return$this->belongsTo(user::class,'Creador_id');
+    }
 }

@@ -21,23 +21,28 @@ class LoginController extends Controller
         $credentials = [
             "name" => $request->name,
             "password" => $request->password,
-            
+
         ];
         //return $credentials;
         if (Auth::attempt($credentials)) {
+            $datos = DB::table('users')
+                ->select('tipo', 'id', 'name_user', 'activo')
+                ->where('name', $credentials['name'])
+                ->get();
 
-            $request->session()->regenerate();
-            //return "si";
-            Session::put('user', $credentials['name']);
+            if ($datos[0]->activo == 1) {
+                $request->session()->regenerate();
+                //return "si";
+                Session::put('user', $credentials['name']);
+                Session::put('tipo', $datos[0]->tipo);
+                Session::put('nombre', $datos[0]->name_user);
+                Session::put('id', $datos[0]->id);
+                return redirect('/nuevo');
+            } else {
+                //return "no";
+                return redirect('/login');
+            }
 
-            $datos=DB::table('users')
-            ->select('tipo', 'id')
-            ->where('name', $credentials['name'])
-            ->get();
-
-            Session::put('tipo', $datos[0]->tipo);
-            Session::put('id', $datos[0]->id);
-            return redirect('/nuevo');
         } else {
             //return "no";
             return redirect('/login');

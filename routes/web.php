@@ -25,3 +25,5 @@ Route::POST('/tckActualizar',[TicketsController::class,'actualizar'])->name('tck
 Route::get('nuevoUsuario',[UsuarioController::class,'index']);
 Route::POST('nuevoUsuario/nsStorage',[UsuarioController::class,'store'])->name('usuario.store');
 
+
+

@@ -14,16 +14,20 @@ return new class extends Migration
         //
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->integer('User');
+            //$table->unsignedInteger('Creador_id');
+            $table->foreignId('Creador_id')->references('id')->on('users');
             $table->string('Falla');
             $table->string('Detalles');
-            $table->integer('Usuario_resuelto')->nullable();
+            $table->integer('resuelto_id')->nullable();
+            //$table->foreignId('resuelto_id')->references('id')->on('users');
             $table->string('Diagnostico')->nullable();
             $table->string('Urgencia')->nullable();
             $table->string('Foto')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('fecha_resuelto')->nullable();
+
+            //llave foranea a users->id
             
         });
     }

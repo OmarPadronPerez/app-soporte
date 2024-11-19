@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('name_user');
             $table->string('password');
             $table->boolean('tipo')->default('0');
+            $table->boolean('activo')->default('0');
             $table->rememberToken();
             $table->timestamps();
         });

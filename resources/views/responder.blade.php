@@ -1,6 +1,7 @@
 @extends('layout.app')
 
 @section('content')
+<a name="" id="" class="btn btn-primary" href="{{url('/historial')}}" role="button"><- cancelar</a>
     <form action="{{ url('/tckActualizar') }}" method="POST"class="container">
         @csrf
         <div class="row justify-content-center align-items-center g-2">
@@ -9,7 +10,7 @@
                 <div class="card ">
                     <div class="card-header">
 
-                        <h4><b>Usuario: </b>{{ $dato->User }}</h4>
+                        <h4><b>Usuario: </b>{{ $dato->Creador_id  }}</h4>
 
                         <h5><b>Falla con: </b>{{ $dato->Falla }}</h5>
                         <div class="mb-3">

@@ -1,13 +1,16 @@
 @extends('layout.app')
 
 @section('content')
-    <x-regla />
 
     <form action="{{url('/nuevoUsuario/nsStorage')}}" method="POST" style="margin: 20px">
         @csrf
         <div class="mb-3">
             <label for="" class="form-label">usuario</label>
             <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId" placeholder="" />
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">nombre</label>
+            <input type="text" class="form-control" name="name_user" id="name_user" aria-describedby="helpId" placeholder="" />
         </div>
         <div class="mb-3">
             <label for="" class="form-label">Contraseña</label>

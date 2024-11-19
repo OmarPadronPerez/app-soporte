@@ -1,0 +1,23 @@
+a {
+    text-decoration: none;
+}
+
+.principal {
+    margin-top: 15px;
+}
+
+.card {
+    margin-bottom: 20px
+}
+
+.tituloGrave {
+    background-color: #fc9781;
+}
+
+.tituloBajo {
+    background-color: #31bd00;
+}
+
+.tituloAlto {
+    background-color: #FFC300;
+}

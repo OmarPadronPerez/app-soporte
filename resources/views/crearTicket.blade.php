@@ -44,7 +44,7 @@
                 <textarea name="Detalles" class="form-control" name="detalles" id="detalles" rows="3"></textarea>
             </div>
             <div class="mb-3" style="display:none">
-                <textarea name="User" class="form-control" name="user" id="user" rows="1"> {{Session::get('id')}} </textarea>
+                <textarea name="Creador_id" class="form-control" name="Creador_id" id="Creador_id" rows="1"> {{Session::get('id')}} </textarea>
             </div>
 
             <div class="mb-3">
