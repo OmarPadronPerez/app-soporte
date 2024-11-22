@@ -2,16 +2,15 @@
 
 @section('content')
     <div class="container principal">
-        <div style="margin-top: 20px"></div>
         <a name="" id="" class="btn btn-primary col-12 col-md-2" href="{{ url('/historial') }}" role="button"
-            ><--regresar</a>
-        <div class="row justify-content-center align-items-center g-2">
-            
+            style="margin: 10px 0;"><--regresar </a>
+                <div class="row justify-content-center align-items-center g-2">
+
                     <div class="card ">
                         @foreach ($datos as $dato)
                             <div class="card-header">
 
-                                <h4><b>Usuario: </b>{{ $dato->Creador_id}}</h4>
+                                <h4><b>Usuario: </b>{{ $dato->Creador_id }}</h4>
 
                                 <h4><b>Falla con: </b>{{ $dato->Falla }}</h4>
 
@@ -69,6 +68,6 @@
                     <textarea class="form-control d-none" name="id" id="id" rows="1">{{ $datos[0]->id }}</textarea>
                     <div class="espacio" style="height: 20px"></div>
 
-        </div>
+                </div>
     </div>
 @endsection

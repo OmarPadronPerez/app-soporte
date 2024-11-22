@@ -1,7 +1,5 @@
 <link type="text/css" href="{{ asset('css/estilos.css') }}" rel="stylesheet">
 
-
-
 <a href="{{ url($redirigir) }}" class="card ">
     <div class="container">
         <div class="row justify-content-between align-items-center card-header">
@@ -11,10 +9,6 @@
                 </h5>
 
             </div>
-            <!--
-            <div class="col-12 col-md-3 tipo">
-                <h6>Gravedad: urgente</h6>
-            </div>-->
             <div class="col-12 col-md-5 estado">
                 <h5 class="card-text">
                     <b>Estado:</b>
@@ -47,7 +41,6 @@
         </div>
 
     </div>
-
 
     <div class="card-body">
         <div class="descripcion">

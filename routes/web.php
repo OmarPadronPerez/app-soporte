@@ -22,8 +22,14 @@ Route::GET('completo/{id}',[TicketsController::class, 'verTicketCompleto']);
 
 Route::POST('/tckActualizar',[TicketsController::class,'actualizar'])->name('tckActualizar');
 
+
+Route::GET('usuarios',[UsuarioController::class,'verUsuarios']);
+Route::GET('usuarios/{id}',[UsuarioController::class,'actUsuario']);
+Route::POST('gUsuario',[UsuarioController::class,'gUsuario']);
 Route::get('nuevoUsuario',[UsuarioController::class,'index']);
 Route::POST('nuevoUsuario/nsStorage',[UsuarioController::class,'store'])->name('usuario.store');
+
+
 
 
 
