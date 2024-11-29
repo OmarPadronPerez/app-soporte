@@ -10,6 +10,7 @@ class Ticket extends Model
     use HasFactory;
 
     protected $table = 'tickets';
+    
     protected $fillable = [
         'id', 
         'Creador_id', 
@@ -25,7 +26,8 @@ class Ticket extends Model
         'updated_at'
     ];
 
+
     public function usuario (){
-        return$this->belongsTo(user::class,'Creador_id');
+        return $this->belongsTo(user::class,'Creador_id');
     }
 }

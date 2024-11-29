@@ -6,11 +6,7 @@ use App\Models\Ticket;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Collections\SheetCollection;
 use Maatwebsite\Excel\Facades\Excel;
-
-use function Symfony\Component\Clock\now;
-use function Symfony\Component\String\b;
 
 class ReportesController extends Controller
 {
@@ -29,25 +25,28 @@ class ReportesController extends Controller
             $fInicio = date_format($now, 'Y') . "-" . date_format($now, 'm') . "-1";
             $fFin = date_format($now->endOfMonth(), "Y-m-d");
             $fechas = [
-                "inicio"=>$fInicio, 
-                "fin"=>$fFin
+                "inicio" => $fInicio,
+                "fin" => $fFin
             ];
         }
         //return $fechas;
-        $datos=DB::table('tickets')
-        ->whereBetween('created_at', [$fechas["inicio"], $fechas["fin"]])
-        ->get();
+        $datos = DB::table('tickets')
+            ->whereBetween('created_at', [$fechas["inicio"], $fechas["fin"]])
+            ->orderBy('created_at', 'DESC')
+            ->get();
 
         return view('verReportes')->with('datos', $datos);
     }
 
-    public function exportarExcel(){
-        $tickets=Ticket::all();
-        return Excel::create('tickets',function($excel) use ($tickets){
-            $excel->sheet('Tickets', function($sheet) use ($tickets){
-                $sheet->fromArray($tickets->toArray());
+
+    public function exportarExcel()
+    {
+        Excel::create('Laravel Excel', function ($excel) {
+            $excel->sheet('Productos', function ($sheet) {
+                $lista = Ticket::all();
+                $sheet->fromArray($lista);
             });
-        })->download('tickets.xlsx');
+        })->export('xls');
     }
 
     /**
