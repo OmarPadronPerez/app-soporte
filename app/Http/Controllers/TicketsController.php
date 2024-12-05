@@ -6,6 +6,7 @@ use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class TicketsController extends Controller
 {
@@ -73,9 +74,17 @@ class TicketsController extends Controller
     public function store(Request $request)
     {
         $datos = $request->all();
+
         if (Session::get('tipo') == 1) {
             $datos['Creador_id'] = $datos['usuario2'];
         }
+        
+        if (isset($datos["Foto"])) {//poner lo de la foto
+            $now = new \DateTime();
+            $nombre=$datos['Creador_id'].$now.
+            Storage::disk('local')->put('example.txt', 'Contents');
+        }
+
         Ticket::create($datos);
         return redirect('tickets');
     }

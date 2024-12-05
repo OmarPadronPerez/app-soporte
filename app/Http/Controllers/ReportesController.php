@@ -29,6 +29,7 @@ class ReportesController extends Controller
                 "fin" => $fFin
             ];
         }
+        
         //return $fechas;
         $datos = DB::table('tickets')
             ->whereBetween('created_at', [$fechas["inicio"], $fechas["fin"]])
