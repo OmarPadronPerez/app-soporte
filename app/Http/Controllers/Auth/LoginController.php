@@ -7,9 +7,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use AuthenticatesUsers;
 
 class LoginController extends Controller
 {
+    public $maxAttempts=3;
+    public $decayMinutes=30;   
+
     public function index()
     {
         return view('login');
@@ -40,18 +44,14 @@ class LoginController extends Controller
                 return redirect('/nuevo');
             } else {
                 //return "no";
-                return redirect('/login');
+                return redirect('/login')->with("error", "inactivo");
             }
-
         } else {
             //return "no";
-            return redirect('/login');
+            return view('/login')->with("error", "contraseña");
         }
     }
-    public function authenticate(Request $request) {}
-
-    public function register(Request $request) //registrar usuario
-    {}
+    
 
     public function logout(Request $request)
     {

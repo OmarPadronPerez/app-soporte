@@ -1,35 +1,50 @@
 @extends('layout.app')
 
 @section('content')
+    <style>
+        main {
+            margin-top: 0;
+        }
+    </style>
     <!--login-->
     <section class="vh-100" style="background-color: #508bfc;">
 
         <div class="container py-5 h-100">
 
-            @if ($errors->all())<!--falla-->
-                
-            
-                <div class="row justify-content-center align-items-center g-2">
-                    <div class="col-12">
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            @foreach ($errors->all() as $error)
-                                <li>{{$error}}</li>
-                            @endforeach
-                        </div>
-
-
-                    </div>
-
-                </div>
-            @endif
-
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                    <div class="justify-content-center align-items-center card shadow-2-strong"
-                        style="border-radius: 1rem;">
+                    <div class="justify-content-center align-items-center card shadow-2-strong" style="border-radius: 1rem;">
+
                         <form action="{{ url('/aunt') }}" method="POST" class="card-body p-5 text-center">
                             @csrf
+                            <!--usuario y contraseña no validos-->
+
+                            @if (isset($error))
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                    <div>
+
+
+                                        @switch($error)
+                                            @case('contraseña')
+                                                Usuario o contraseña no validos
+                                            @break
+
+                                            @case('inactivo')
+                                                usuario inactivo
+                                            @break
+
+                                            @default
+                                                Error desconocido, contacte a soporte
+                                            @break
+                                        @endswitch
+
+
+                                    </div>
+                                </div>
+                            @endif
+
                             <h3 class="mb-5">Grupo ABG</h3>
 
                             <div data-mdb-input-init class="form-outline mb-4">
