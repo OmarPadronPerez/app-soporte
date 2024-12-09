@@ -59,7 +59,7 @@
                     <h3>Muestranos un poco mas</h3>
                 </label>
                 <br>
-                <input name="file" type="file" name="file" id="file" enctype="multipart/form-data">
+                <input name="file" type="file" id="file-input" enctype="multipart/form-data"/>
             </div>
 
             <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block"

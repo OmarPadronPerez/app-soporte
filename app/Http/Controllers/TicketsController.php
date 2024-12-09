@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
@@ -52,6 +53,7 @@ class TicketsController extends Controller
             return view('crearTicket');
         }
     }
+
     public function historialTicket()
     {
         $datos = DB::table('tickets')
@@ -74,15 +76,21 @@ class TicketsController extends Controller
     public function store(Request $request)
     {
         $datos = $request->all();
-
+        
         if (Session::get('tipo') == 1) {
             $datos['Creador_id'] = $datos['usuario2'];
         }
         
-        if (isset($datos["Foto"])) {//poner lo de la foto
-            $now = new \DateTime();
-            $nombre=$datos['Creador_id'].$now.
-            Storage::disk('local')->put('example.txt', 'Contents');
+        if (isset($datos["file"])) {//poner lo de la foto
+            
+            $file = $request->file('file');
+            //$fecha = date_format(new \DateTime(), "Y-m-d");
+            //$nombre="nombre";
+            $nombre=$datos['Creador_id'] ;
+            
+            $datos["Foto"]=Storage::disk('local')->put($nombre, $file);
+            
+            //Storage::put($nombre, $file);
         }
 
         Ticket::create($datos);

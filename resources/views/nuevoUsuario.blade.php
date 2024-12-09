@@ -31,14 +31,20 @@
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Contraseña</label>
-                    <input type="text" class="form-control" name="password" id="password" aria-describedby="helpId"
+                    <input type="password" class="form-control" name="password" id="password" aria-describedby="helpId"
                         placeholder="" />
+                </div>
+
+                <div class="mb-3 d-none">
+                    <label for="" class="form-label">activo</label>
+                    <input type="text" class="form-control" name="activo" id="activo" aria-describedby="helpId"
+                        placeholder="" value="1">
                 </div>
 
 
                 <div class="form-check">
                     <input class="form-check-input" name="tipo" type="checkbox" value="" id="tipo" />
-                    <label class="form-check-label" for="tipo"> Administrador </label>
+                    <label class="form-check-label" for="tipo"> ¿Administrador? </label>
                 </div>
 
                 <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg "

@@ -30,7 +30,7 @@ class UsuarioController extends Controller
     {
         $request['name_user'] = strtoupper($request['name_user']);
         User::create($request->all());
-        return url('login');
+        return redirect('usuarios');
         //return response()->json($datos);
     }
     public function actUsuario($id)

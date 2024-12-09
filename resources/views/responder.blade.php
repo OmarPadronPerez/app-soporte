@@ -6,6 +6,7 @@
             margin: 10px;
         }
     </style>
+    {{$datos}}
 
     <form action="{{ url('/tckActualizar') }}" method="POST"class="container">
         @csrf
@@ -64,6 +65,25 @@
                             <textarea class="form-control" name="Diagnostico" id="Diagnostico" rows="3"></textarea>
                         </div>
                     </div>
+
+                    {{$datos[0]->Foto}}
+                    <br>
+
+                    
+                    {{Storage::url("app/private/".$datos[0]->Foto)}}
+                    
+                    @if (isset($datos[0]->Foto))
+                    <!--funciones para imagenes,revisar
+                        https://www.honeybadger.io/blog/using-intervention-image-in-laravel/-->
+                    <img
+                            src="{{$imagen}}"
+                            class="img-fluid rounded-top"
+                            alt=""
+                        />
+                        
+                        
+                    @endif
+
                     <div class="row justify-content-between align-items-start g-2">
                         <h3>Estado</h3>
 

@@ -59,10 +59,8 @@
                                 <h3>Diagnostico tecnico</h3>
                             </label>
                             <textarea readonly class="form-control" name="Diagnostico" id="Diagnostico" rows="3">
-@if ($dato->Diagnostico)
-{{ $dato->Diagnostico }}
-@endif
-</textarea>
+                                @if ($dato->Diagnostico){{ $dato->Diagnostico }}@endif
+                            </textarea>
                         </div>
                     </div>
                     <textarea class="form-control d-none" name="id" id="id" rows="1">{{ $datos[0]->id }}</textarea>
