@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ticket;
+use Illuminate\Container\Attributes\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 
 class TicketsController extends Controller
 {
@@ -84,13 +83,15 @@ class TicketsController extends Controller
         if (isset($datos["file"])) {//poner lo de la foto
             
             $file = $request->file('file');
-            //$fecha = date_format(new \DateTime(), "Y-m-d");
-            //$nombre="nombre";
-            $nombre=$datos['Creador_id'] ;
-            
+            $fecha = date_format(new \DateTime(), "Y_m_d");
+            $nombre=$datos['Creador_id']."_".$fecha."_". uniqid() .".".$file->getClientOriginalExtension();
+            /*$nombre=$datos['Creador_id'] ;
             $datos["Foto"]=Storage::disk('local')->put($nombre, $file);
+            Storage::put($nombre, $file);*/
+            $destinationPath = 'images/'.$datos['Creador_id']."/";
+            $file->move($destinationPath, $nombre);
+            $datos["Foto"]=$nombre;
             
-            //Storage::put($nombre, $file);
         }
 
         Ticket::create($datos);
@@ -132,4 +133,12 @@ class TicketsController extends Controller
             ->get();
         return view('completo')->with('datos', $datos);
     }
+    
+    public function descagarArchivo($id,$file)
+    {
+        $ruta=public_path('images\\'.$id."\\".$file);
+        //return $ruta;
+        return response()->download($ruta);
+    }
+
 }

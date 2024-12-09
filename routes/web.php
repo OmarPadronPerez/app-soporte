@@ -16,6 +16,8 @@ Route::GET('/nuevo',[TicketsController::class, 'crearTicket'])->middleware('auth
 Route::POST('/nuevo/envtkt',[TicketsController::class, 'store'])->middleware('auth');
 Route::GET('tickets',[TicketsController::class, 'verTickets'])->middleware('auth');
 Route::GET('tickets/{id}',[TicketsController::class, 'verTicketsid'])->middleware('auth');
+Route::GET('tickets/{id}/{file}',[TicketsController::class, 'descagarArchivo'])->middleware('auth');
+
 
 Route::GET('historial',[TicketsController::class,'historialTicket'])->middleware('auth');
 Route::GET('completo/{id}',[TicketsController::class, 'verTicketCompleto'])->middleware('auth');

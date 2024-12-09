@@ -6,14 +6,13 @@
             margin: 10px;
         }
     </style>
-    {{$datos}}
 
     <form action="{{ url('/tckActualizar') }}" method="POST"class="container">
         @csrf
 
         <div class="row justify-content-center align-items-center g-2">
             <a name="" id="" class="btn btn-primary boton flecha" href="{{ url('/historial') }}"
-                role="button"><-- Cancelar</a>
+                role="button"><-- Cancelar </a>
 
                     @foreach ($datos as $dato)
                         <div class="card ">
@@ -50,10 +49,7 @@
                                 </div>
 
                             </div>
-                            <div class="col-12 col-md-5 imagen">
-                                <img src="image source" class="img-fluid rounded-top" alt="" />
 
-                            </div>
                         </div>
                     @endforeach
 
@@ -66,22 +62,13 @@
                         </div>
                     </div>
 
-                    {{$datos[0]->Foto}}
-                    <br>
-
-                    
-                    {{Storage::url("app/private/".$datos[0]->Foto)}}
-                    
                     @if (isset($datos[0]->Foto))
-                    <!--funciones para imagenes,revisar
-                        https://www.honeybadger.io/blog/using-intervention-image-in-laravel/-->
-                    <img
-                            src="{{$imagen}}"
-                            class="img-fluid rounded-top"
-                            alt=""
-                        />
-                        
-                        
+                        <x-descargas>
+                            @slot('file', $datos[0]->Foto)
+                            @slot('id', $dato->Creador_id)
+                        </x-descargas>
+                        <!--funciones para imagenes,revisar
+                                    https://www.honeybadger.io/blog/using-intervention-image-in-laravel/-->
                     @endif
 
                     <div class="row justify-content-between align-items-start g-2">
