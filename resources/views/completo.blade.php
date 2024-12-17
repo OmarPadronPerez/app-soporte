@@ -16,7 +16,7 @@
 
                                 <h4><b>Estado: </b>
                                     @if ($dato->fecha_resuelto)
-                                        cerrado
+                                        Cerrado
                                     @else
                                         En revisión
                                     @endif
@@ -44,11 +44,6 @@
                                         {{ $dato->Detalles }}
                                     </p>
                                 </div>
-
-                            </div>
-                            <div class="col-12 col-md-5 imagen">
-                                <img src="image source" class="img-fluid rounded-top" alt="" />
-
                             </div>
                         @endforeach
                     </div>
@@ -59,11 +54,21 @@
                                 <h3>Diagnostico tecnico</h3>
                             </label>
                             <textarea readonly class="form-control" name="Diagnostico" id="Diagnostico" rows="3">
-                                @if ($dato->Diagnostico){{ $dato->Diagnostico }}@endif
-                            </textarea>
+@if ($dato->Diagnostico)
+{{ $dato->Diagnostico }}
+@endif
+</textarea>
                         </div>
                     </div>
-                    <textarea class="form-control d-none" name="id" id="id" rows="1">{{ $datos[0]->id }}</textarea>
+                    @if (isset($datos[0]->Archivo))
+                        <x-descargas>
+                            @slot('file', $datos[0]->Archivo)
+                            @slot('id', $dato->Creador_id)
+                        </x-descargas>
+                        <!--funciones para imagenes,revisar
+                                            https://www.honeybadger.io/blog/using-intervention-image-in-laravel/-->
+                    @endif
+                    <textarea class="form-control d-none" name="id" id="id" rows="1" hidden>{{ $datos[0]->id }}</textarea>
                     <div class="espacio" style="height: 20px"></div>
 
                 </div>

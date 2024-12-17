@@ -1,12 +1,11 @@
 @extends('layout.app')
 
 @section('content')
-
-<style>
-    .container{
-        margin-top: 10px;
-    }
-</style>
+    <style>
+        .container {
+            margin-top: 10px;
+        }
+    </style>
 
     <div class="container">
         <div class="row justify-content-between align-items-between g-2" style="margin: 10px 0px">
@@ -18,19 +17,21 @@
             </div>
         </div>
 
-        <div class="row justify-content-center align-items-center g-2">
+        <div class="row justify-content-center align-items-center">
 
             @foreach ($datos as $dato)
-                <x-tarjetaUsuario>
-                    @slot('id', $dato->id)
-                    @slot('name', $dato->name)
-                    @slot('name_user', $dato->name_user)
-                    @slot('activo', $dato->activo)
-                    @slot('tipo', $dato->tipo)
-                    @slot('updated_at', $dato->updated_at)
-                    @slot('correo',$dato->correo)
-
-                </x-tarjetaUsuario>
+                @if (!($dato->id == '1'))
+                    <x-tarjetaUsuario>
+                        @slot('id', $dato->id)
+                        @php
+                            $nombreCompleto = $dato->name . ' ' . $dato->lastName;
+                        @endphp
+                        @slot('name', $nombreCompleto)
+                        @slot('activo', $dato->activo)
+                        @slot('area', $dato->area)
+                        @slot('updated_at', $dato->updated_at)
+                    </x-tarjetaUsuario>
+                @endif
             @endforeach
 
         </div>

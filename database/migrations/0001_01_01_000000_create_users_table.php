@@ -12,14 +12,24 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('name_user');
-            $table->string('password');
-            $table->boolean('tipo')->default('0');
-            $table->boolean('activo')->default('0');
+            $table->id('id');
+            $table->string('name')->nullable(false);
+            $table->string('lastName')->nullable(false);
+            $table->string('lastName2')->nullable();
+            $table->string('area')->nullable(false);
+            $table->string('password')->nullable(false);
+            $table->string('user_vpn')->nullable();
+            $table->string('pass_vpn')->nullable();
+            $table->string('user_servidor')->nullable();
+            $table->string('pass_servidor')->nullable(false);
+            $table->string('correo')->nullable();
+            $table->string('pass_correo')->nullable();
+            $table->string('pass_pc')->nullable();
+            $table->string('pass_aps')->nullable();
+            $table->boolean('activo')->default(1);
             $table->rememberToken();
             $table->timestamps();
+
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

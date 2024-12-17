@@ -19,7 +19,7 @@ class Ticket extends Model
         'resuelto_id',
         'Diagnostico',
         'Urgencia',
-        'Foto',
+        'Archivo',
         'fecha_creacion',
         'fecha_resuelto',
         'created_at',

@@ -12,7 +12,7 @@ class TicketsController extends Controller
 {
     public function verTickets()
     {
-        if (Session::get('tipo') == 1) {
+        if (Session::get('area') == 'SOPORTE') {
             $datos = DB::table('tickets')
                 ->where('fecha_resuelto', NULL)
                 ->orderBy('created_at', 'asc')
@@ -31,7 +31,7 @@ class TicketsController extends Controller
         $datos = DB::table('tickets')
             ->where('id', $id)
             ->get();
-        if (Session::get('tipo') == 1) { //si es administrador lleva a editar
+        if (Session::get('area') == 'SOPORTE') { //si es administrador lleva a editar
             return view('responder')->with('datos', $datos);
         } else { //si es usuario estandar te redirige a solo ver
             //return 'otro';
@@ -42,11 +42,14 @@ class TicketsController extends Controller
 
     public function crearTicket()
     {
-        if (Session::get('tipo') == 1) {
+        if (Session::get('area') == 'SOPORTE') {
 
             $datos = DB::table('users')
-                ->select('id', 'name')
+                ->select('id', 'name','lastName','lastName2')
+                ->orderBy('name', 'asc')
                 ->get();
+
+            //return $datos;
             return view('crearTicket')->with('datos', $datos);
         } else {
             return view('crearTicket');
@@ -76,22 +79,18 @@ class TicketsController extends Controller
     {
         $datos = $request->all();
         
-        if (Session::get('tipo') == 1) {
+        if (Session::get('area') == 'SOPORTE') {
             $datos['Creador_id'] = $datos['usuario2'];
         }
         
-        if (isset($datos["file"])) {//poner lo de la foto
+        if (isset($datos["file"])) {
             
             $file = $request->file('file');
             $fecha = date_format(new \DateTime(), "Y_m_d");
             $nombre=$datos['Creador_id']."_".$fecha."_". uniqid() .".".$file->getClientOriginalExtension();
-            /*$nombre=$datos['Creador_id'] ;
-            $datos["Foto"]=Storage::disk('local')->put($nombre, $file);
-            Storage::put($nombre, $file);*/
-            $destinationPath = 'images/'.$datos['Creador_id']."/";
+            $destinationPath = 'archivos/'.$datos['Creador_id']."/";
             $file->move($destinationPath, $nombre);
-            $datos["Foto"]=$nombre;
-            
+            $datos["Archivo"]=$nombre;
         }
 
         Ticket::create($datos);
@@ -123,7 +122,7 @@ class TicketsController extends Controller
                     'updated_at' => $now
                 ]);
         }
-        return redirect('historialTicket');
+        return redirect('historial');
     }
 
     public function verTicketCompleto($id)
@@ -140,5 +139,6 @@ class TicketsController extends Controller
         //return $ruta;
         return response()->download($ruta);
     }
+    
 
 }

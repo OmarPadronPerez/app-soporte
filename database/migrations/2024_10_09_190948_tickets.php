@@ -22,7 +22,7 @@ return new class extends Migration
             //$table->foreignId('resuelto_id')->references('id')->on('users');
             $table->string('Diagnostico')->nullable();
             $table->string('Urgencia')->nullable();
-            $table->string('Foto')->nullable();
+            $table->string('Archivo')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('fecha_resuelto')->nullable();

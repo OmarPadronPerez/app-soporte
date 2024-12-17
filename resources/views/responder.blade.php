@@ -62,9 +62,9 @@
                         </div>
                     </div>
 
-                    @if (isset($datos[0]->Foto))
+                    @if (isset($datos[0]->Archivo))
                         <x-descargas>
-                            @slot('file', $datos[0]->Foto)
+                            @slot('file', $datos[0]->Archivo)
                             @slot('id', $dato->Creador_id)
                         </x-descargas>
                         <!--funciones para imagenes,revisar

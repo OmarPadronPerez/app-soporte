@@ -66,11 +66,11 @@
     <div class="mb-3" style="{{ $previa }}">
         @if ($tipo == 'Imagen')
             <!--si es imagen-->
-            <img src="{{ '/images' . $ruta }}" class="img-fluid rounded-top" alt="" />
+            <img src="{{ '/archivos' . $ruta }}" class="img-fluid rounded-top" alt="" />
         @endif
         @if ($tipo == 'PDF')
             <!--si es pdf-->
-            <iframe src="{{ '/images' . $ruta }}" frameborder="0"></iframe>
+            <iframe src="{{ '/archivos' . $ruta }}" frameborder="0"></iframe>
         @endif
 
 

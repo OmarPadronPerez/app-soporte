@@ -12,17 +12,18 @@
             </div>
 
             <div class="col-12 ">
-                @foreach ($datos as $dato)
-                    <x-tarjeta > 
-                        @slot('id',$dato->id)
-                        @slot('fCreacion',$dato->created_at)
-                        @slot('Falla', $dato->Falla)
-                        @slot('Descripcion',$dato->Detalles)
-                        @slot('redirigir','tickets/'.$dato->id)
-                        @slot('Urgencia',$dato->Urgencia)
-                    </x-tarjeta>
-                @endforeach
-
+                @if ($datos)
+                    @foreach ($datos as $dato)
+                        <x-tarjeta>
+                            @slot('id', $dato->id)
+                            @slot('fCreacion', $dato->created_at)
+                            @slot('Falla', $dato->Falla)
+                            @slot('Descripcion', $dato->Detalles)
+                            @slot('redirigir', 'tickets/' . $dato->id)
+                            @slot('Urgencia', $dato->Urgencia)
+                        </x-tarjeta>
+                    @endforeach
+                @endif
             </div>
         </div>
 

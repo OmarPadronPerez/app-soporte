@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use AuthenticatesUsers;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    public $maxAttempts=3;
-    public $decayMinutes=30;   
+    public $maxAttempts = 3;
+    public $decayMinutes = 30;
 
     public function index()
     {
@@ -23,23 +24,22 @@ class LoginController extends Controller
     {
         //return 'entra';
         $credentials = [
-            "name" => $request->name,
-            "password" => $request->password,
-
+            "user_servidor" => $request->name,
+            "password" => $request->password
         ];
         //return $credentials;
         if (Auth::attempt($credentials)) {
             $datos = DB::table('users')
-                ->select('tipo', 'id', 'name_user', 'activo')
-                ->where('name', $credentials['name'])
+                ->select('area', 'id', 'name', 'activo')
+                ->where('user_servidor', $credentials['user_servidor'])
                 ->get();
 
             if ($datos[0]->activo == 1) {
                 $request->session()->regenerate();
                 //return "si";
-                Session::put('user', $credentials['name']);
-                Session::put('tipo', $datos[0]->tipo);
-                Session::put('nombre', $datos[0]->name_user);
+                Session::put('user', $credentials['user_servidor']);
+                Session::put('nombre', $datos[0]->name);
+                Session::put('area', $datos[0]->area);
                 Session::put('id', $datos[0]->id);
                 return redirect('/nuevo');
             } else {
@@ -51,7 +51,15 @@ class LoginController extends Controller
             return view('/login')->with("error", "contraseña");
         }
     }
-    
+    public function username()
+    {
+        return 'user_servidor';
+    }
+    public function password()
+    {
+        return 'pass_servidor';
+    }
+
 
     public function logout(Request $request)
     {

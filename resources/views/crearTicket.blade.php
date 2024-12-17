@@ -16,19 +16,19 @@
             </div>
             <hr>
 
-            @if (Session::get('tipo') == 1)
+            @if (isset($datos))
                 <div class="mb-3">
                     <h3> Usuarios </h3>
                     <select name="usuario2" id="usuario2" class="form-select" aria-label="Default select example">
                         @foreach ($datos as $usr)
-                            <option value="{{ $usr->id }}">{{ $usr->name }}</option>
+                            <option value="{{ $usr->id }}">{{ $usr->name." ". $usr->lastName." "}}</option>
                         @endforeach
                     </select>
                 </div>
             @endif
 
             <div class="mb-3">
-                <label for="ta-descripcion" class="form-label">
+                <label for="Falla" class="form-label">
                     <h3> ¿Con que tienes problemas? </h3>
                 </label>
                 <select name="Falla" id="Falla" class="form-select" aria-label="Default select example">
@@ -45,7 +45,7 @@
                 
             </div>
             <div class="mb-3">
-                <label for="ta-descripcion" class="form-label">
+                <label for="detalles" class="form-label">
                     <h3>Describenos tu falla</h3>
                 </label>
                 <textarea name="Detalles" class="form-control" name="detalles" id="detalles" rows="3" required></textarea>
@@ -55,7 +55,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="" class="form-label">
+                <label for="file-input" class="form-label">
                     <h3>Muestranos un poco mas</h3>
                 </label>
                 <br>

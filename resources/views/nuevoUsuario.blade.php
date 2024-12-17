@@ -1,61 +1,126 @@
 @extends('layout.app')
 
 @section('content')
-<style>
-    button{
-        margin: 10px 0;
-    }
-</style>
+    <style>
+        button {
+            margin: 10px 0;
+        }
+
+        .datos_drincipal,
+        .datos_secundrio {
+            border: 0.5px solid black;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            padding: 0.5rem;
+        }
+    </style>
+
+
     <div class="container">
-        <div class="row justify-content-center align-items-center g-2">
+        <div class="row justify-content-center align-items-center g-2 ">
+
             <div class="col">
                 <h2>Nuevo usuario</h2>
             </div>
 
             <form action="{{ url('/nuevoUsuario/nsStorage') }}" method="POST" style="margin: 20px">
                 @csrf
-                <div class="mb-3">
-                    <label for="" class="form-label">Usuario</label>
-                    <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
-                        placeholder="" />
-                </div>
-                <div class="mb-3">
-                    <label for="" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" name="name_user" id="name_user" aria-describedby="helpId"
-                        placeholder="" />
-                </div>
-                <div class="mb-3">
-                    <label for="" class="form-label">Correo</label>
-                    <input type="email" class="form-control" name="correo" id="correo" aria-describedby="helpId"
-                        placeholder="" />
-                </div>
-                <div class="mb-3">
-                    <label for="" class="form-label">Contraseña</label>
-                    <input type="password" class="form-control" name="password" id="password" aria-describedby="helpId"
-                        placeholder="" />
+                <div class="datos_drincipal ">
+                    <div class="row g-2 justify-content-center align-items-center ">
+                        <div class="mb-3 col-12 col-md-4">
+                            <input type="text" class="form-control" name="name" id="name"
+                                aria-describedby="helpId" placeholder="Nombre(s)" required />
+                        </div>
+                        <div class="mb-3 col-12 col-md-4">
+                            <input type="text" class="form-control" name="lastName" id="lastName"
+                                aria-describedby="helpId" placeholder="Apellido Paterno"required />
+                        </div>
+                        <div class="mb-3 col-12 col-md-4">
+                            <input type="text" class="form-control" name="lastName2" id="lastName2"
+                                aria-describedby="helpId" placeholder="Apellido Materno"required />
+                        </div>
+                    </div>
+                    <div class="row g-1">
+                        <div class="col-12 col-md-6">
+                            <select name="area" id="area" class="form-select" aria-label="Default select example"
+                                required>
+                                <option value="">Área</option>
+                                <option value="NOMINAS">NOMINAS</option>
+                                <option value="RRHH">RRHH</option>
+                                <option value="MANTENIMIENTO">MANTENIMIENTO</option>
+                                <option value="SELECCION">SELECCION</option>
+                                <option value="SOPORTE">SOPORTE</option>
+                                <option value="DESARROLLO">DESARROLLO</option>
+                            </select>
+                        </div>
+
+                        <div class=" col-12 col-md-6">
+                            <input type="number" class="form-control" name="id" id="id"
+                                aria-describedby="helpId" placeholder="Numero de nomina"required />
+                        </div>
+                    </div>
                 </div>
 
-                <div class="mb-3 d-none">
-                    <label for="" class="form-label">activo</label>
-                    <input type="text" class="form-control" name="activo" id="activo" aria-describedby="helpId"
-                        placeholder="" value="1">
-                </div>
+                <div class="datos_secundrio">
+                    <div class="row g-2 ">
+                        <div class="mb-3 col-12 col-md-6">
+                            <label for="pass_pc" class="form-label">Contraseña pc/laptop</label>
+                            <input type="text" class="form-control" name="pass_pc" id="pass_pc"
+                                aria-describedby="helpId" placeholder="" />
+                        </div>
+                        <div class="mb-3 col-12 col-md-6">
+                            <label for="pass_aps" class="form-label">Contraseña Aplicaciones</label>
+                            <input type="text" class="form-control" name="pass_aps" id="pass_aps"
+                                aria-describedby="helpId" placeholder="" />
+                        </div>
+                    </div>
 
+                    <div class="row g-2">
+                        <div class="mb-3 col-12 col-md-6">
+                            <label for="correo" class="form-label">Correo</label>
+                            <input type="email" class="form-control" name="correo" id="correo"
+                                aria-describedby="helpId" placeholder="&#64;grupoabg" />
+                        </div>
+                        <div class="mb-3 col-12 col-md-6">
+                            <label for="pass_correo" class="form-label">Contraseña correo</label>
+                            <input type="text" class="form-control" name="pass_correo" id="pass_correo"
+                                aria-describedby="helpId" placeholder="" />
+                        </div>
+                    </div>
 
-                <div class="form-check">
-                    <input class="form-check-input" name="tipo" type="checkbox" value="" id="tipo" />
-                    <label class="form-check-label" for="tipo"> ¿Administrador? </label>
+                    <div class="row g-2 ">
+                        <div class="mb-3 col-12 col-md-6">
+                            <label for="user_vpn" class="form-label">Usuario vpn</label>
+                            <input type="text" class="form-control" name="user_vpn" id="user_vpn"
+                                aria-describedby="helpId" placeholder="Usuario" />
+                        </div>
+                        <div class="mb-3 col-12 col-md-6">
+                            <label for="pass_vpn" class="form-label">Contraseña VPN</label>
+                            <input type="text" class="form-control" name="pass_vpn" id="pass_vpn"
+                                aria-describedby="helpId" placeholder="" />
+                        </div>
+                    </div>
+
+                    <div class="row g-2 ">
+                        <div class=" col-12 col-md-6">
+                            <label for="user_servidor" class="form-label">Usuario servidor</label>
+                            <input type="text" class="form-control" name="user_servidor" id="user_servidor"
+                                aria-describedby="helpId" placeholder="" />
+                        </div>
+                        <div class=" col-12 col-md-6">
+                            <label for="pass_servidor" class="form-label">Contraseña servidor</label>
+                            <input type="text" class="form-control" name="pass_servidor" id="pass_servidor"
+                                aria-describedby="helpId" placeholder="" />
+                        </div>
+                    </div>
                 </div>
 
                 <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg "
-                    type="submit">Entrar</button>
+                    type="submit">Guardar</button>
 
             </form>
-
-
         </div>
-
-
-
     </div>
+
+    <script src="{{ asset('js/AgregarUsuario.js') }}"></script>
 @endsection

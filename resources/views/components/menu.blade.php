@@ -18,7 +18,7 @@
                     <a class="nav-link" href="/historial">Historial</a>
                 </li>
 
-                @if (Session::get('tipo') == 1)
+                @if (Session::get('area') == "SOPORTE")
                     <span class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
