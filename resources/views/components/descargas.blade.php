@@ -1,5 +1,5 @@
 <style>
-    img {
+    .vista img {
         border: 1px solid #000000;
         padding: 2px;
         width: 100%
@@ -56,26 +56,23 @@
 @endphp
 
 <div class="col-12">
-    <div class="mb-1">
 
-        <a name="" id="" class="btn {{ $estilo }} botonD" href="{{ '/tickets' . $ruta }}"
-            role="button">Descargar <b>{{ $tipo }}</b> </a>
 
-    </div>
-
-    <div class="mb-3" style="{{ $previa }}">
+    <div class="mb-3 vista" style="{{ $previa }}">
         @if ($tipo == 'Imagen')
             <!--si es imagen-->
             <img src="{{ '/archivos' . $ruta }}" class="img-fluid rounded-top" alt="" />
         @endif
         @if ($tipo == 'PDF')
-            <!--si es pdf-->
+            <!--si es pfd-->
             <iframe src="{{ '/archivos' . $ruta }}" frameborder="0"></iframe>
         @endif
 
+        <div class="mb-1">
+            <a name="" id="" class="btn {{ $estilo }} botonD" href="{{ '/tickets' . $ruta }}"
+                role="button">Descargar <b>{{ $tipo }}</b> </a>
 
-        <!--si es pfd-->
-
+        </div>
 
     </div>
 </div>

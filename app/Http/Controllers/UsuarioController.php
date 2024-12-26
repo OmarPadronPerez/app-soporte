@@ -7,6 +7,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 use function Laravel\Prompts\alert;
 
@@ -41,6 +42,7 @@ class UsuarioController extends Controller
             ->where('id', $id)
             ->get();
         $datos[0]->id = $id;
+        
         return view('actUsuario')->with('datos', $datos);
     }
 
@@ -75,6 +77,7 @@ class UsuarioController extends Controller
             ->get()->toArray();
             
         $datoArray = [
+            'id'=>$datos[0]->id,
             'area' => $datos[0]->area,
             'name' => $datos[0]->name,
             'lastName' => $datos[0]->lastName,
@@ -95,5 +98,12 @@ class UsuarioController extends Controller
 
         //return view('usuarioPDF')->with($datoArray);
         return $pdf->download($nombre);
+    }
+    function mi_informacion(){
+        $datos = DB::table('users')
+        ->where('id', '=', Session::get('id'))
+        ->get();
+
+        return view('usuarioCompleto')->with('datos',$datos);
     }
 }

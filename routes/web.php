@@ -31,6 +31,7 @@ Route::POST('gUsuario',[UsuarioController::class,'gUsuario'])->middleware('auth'
 Route::Get('nuevoUsuario',[UsuarioController::class,'index']);
 Route::POST('nuevoUsuario/nsStorage',[UsuarioController::class,'store'])->name('usuario.store');
 Route::get('usuarios/{id}/pdf',[UsuarioController::class,'exportarApdf'])->middleware('auth');
+Route::get('mi_informacion',[UsuarioController::class,'mi_informacion'])->middleware('auth');
 
 //rutas administrar reportes
 Route::GET('reportes',[ReportesController::class,'index'])->middleware('auth');

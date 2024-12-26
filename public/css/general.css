@@ -1,12 +1,11 @@
+main {
+    margin-top: 90px;
+}
 
-main{
-    margin-top: 65px;
+header hr {
+    margin: auto;
+    padding: 0;
+    border-color: #145d68; 
+    width: 80%; 
+    border-width: 2px;
 }
-/*
-form {
-    border: 3px solid #0039fc;
-    padding: 10px 0;
-    margin-bottom: 5px;
-}
-*/
-    

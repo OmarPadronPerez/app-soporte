@@ -9,19 +9,27 @@
                 <h2>Tu Historial</h2>
             </div>
             <div class="col-12">
-                @foreach ($datos as $dato)
-                    <x-tarjeta>
-                        @slot('id',$dato->id)
-                        @slot('fCreacion',$dato->created_at)
-                        @slot('fCierre',$dato->fecha_resuelto)
-                        @slot('Falla', $dato->Falla)
-                        @slot('Descripcion',$dato->Detalles)
-                        @slot('redirigir','completo/'.$dato->id)
+                @if ($datos)
+                    @foreach ($datos as $dato)
+                        @php
+                            $nombre = $dato->name . ' ' . $dato->lastName;
+                        @endphp
 
-                    </x-tarjeta>
-                    <br>
-                @endforeach
-                
+                        <x-tarjeta>
+                            @slot('id', $dato->id)
+                            @slot('usuario', $nombre)
+                            @slot('fCreacion', $dato->created_at)
+                            @slot('fecha_resuelto',$dato->fecha_resuelto)
+                            @slot('Falla', $dato->Falla)
+                            @slot('Descripcion', $dato->Detalles)
+                            @slot('redirigir', 'tickets/' . $dato->id)
+                            @slot('Urgencia', $dato->Urgencia)
+                        </x-tarjeta>
+                    @endforeach
+                @else
+                    <h3>sin tikets que mostrar</h3>
+                @endif
+
             </div>
         </div>
     </div>

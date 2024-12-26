@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    <title>Title</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -14,20 +13,21 @@
 
 <body>
     <style>
+        * {}
+
         h2 {
             text-align: center;
+            margin: 0;
+            padding: 5px 0;
+        }
+
+        h6 {
+            margin: 0;
+            padding: 0;
         }
 
         .principal {
             min-height: 100vh;
-        }
-
-        form {
-            margin: auto;
-        }
-
-        .campo {
-            width: 100%;
         }
 
         input {
@@ -36,109 +36,168 @@
             width: 100%;
         }
 
-        select {
-            display: inline !important;
-        }
-
         .row {
             margin: 5px 0;
         }
 
         .tarjeta {
             padding: 0px;
+            margin: 10px 0;
             border: 1px solid black;
+        }
+
+        .titulo {
+            border-block-end: 1px solid black;
+            background-color: gray;
+            color: white;
         }
 
         .tarjetainfo {
             border: 1px solid black;
-            margin 0;
+            margin: 0;
 
+        }
+
+        table {
+            margin: 0 !important;
+            width: 100%;
+        }
+
+        td {
+            text-align: center
+        }
+
+        .banner {
+            display: inline;
+        }
+        .banner .informacion {
+            width: 60%;
         }
     </style>
     <main class="justify-content-center align-items-center">
         <div class="principal">
+            <div class="banner">
+                <img src="{{ 'imagenes/logoABG.png' }}" class="img-fluid rounded-top" alt="GRUPO ABG" />
+                
+            </div>
 
-            <div class="row justify-content-center align-items-center g-2">
-                <div class="col">
-                    <h2>Usuario</h2>
+            <!-------Usuario----------->
+            <div class="row justify-content-center align-items-center tarjeta">
+                <div class="col-12"style="background-color: black; color: white;">
+                    <h2><b>Usuario</b></h2>
+                </div>
+
+                <div style="padding: 10px">
+
+                    <div class="col-12">
+                        Numero de nomina: <b>{{ $id }}</b>
+                    </div>
+                    <div class="col-12">
+                        Nombre: <b>{{ $name . ' ' . $lastName . ' ' . $lastName2 }}</b>
+                    </div>
+                    <div class="col-12">
+                        Area: <b>{{ $area }}</b>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="row justify-content-center align-items-center">
-                <div class="tarjeta">
-                    <div class="row justify-content-center align-items-center ">
-                        <div class="col">Numero de nomina: <b>654</b></div>
-                        <div class="col">Area: <b>{{ $area }}</b></div>
+            <!-------Laptop----------->
+            <div class="row  justify-content-between align-items-between tarjeta">
+                <div class="col-12 col-md-6 ">
+                    <div class="col-12 titulo">
+                        <h2><b>Laptop</b></h2>
                     </div>
-
-                    <div class="row justify-content-center align-items-center">
-
-                        <div class="col-12 col-md-6">
-                            Nombre: <b>{{ $name . ' ' . $lastName . ' ' . $lastName2 }}</b>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row  justify-content-between align-items-between "style="padding:0;">
-
-                    <div class="col-12 col-md-6 tarjeta">
-                        <div class="col-12 ">
-                            <h2><b>Laptop</b></h2>
-                        </div>
-                        <div class="col-12 tarjetainfo" style="padding:0 12px;">
-                            <input type="text" name="pass_pc" id="pass_pc" value="{{ $pass_pc }}">
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-6 tarjeta">
-                        <div class="col-12 ">
-                            <h2><b>Kiosco</b></h2>
-                        </div>
-                        <div class="col-12 tarjetainfo "style="padding:0 12px;">
-                            <input type="text" name="pass_aps" id="pass_aps" value="{{ $pass_aps }}">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row justify-content-center align-items-center tarjeta">
-                    <div class="col-12  titulo">
-                        <h2 class=""><b>Correo</b></h2>
-                    </div>
-                    <div class="col-6 col-md-6 tarjetainfo">
-                        <input type="text" name="" id="" value="{{ $correo }}" readonly>
-                    </div>
-                    <div class="col-6 col-md-6 tarjetainfo">
-                        <input type="text" name="pass_correo" id="pass_correo" value="{{ $pass_correo }}">
-                    </div>
-                </div>
-
-                <div class="row justify-content-center align-items-center tarjeta">
-                    <div class="col-12  titulo">
-                        <h2 class=""><b>VPN</b></h2>
-                    </div>
-                    @php
-                        $contrasena = $pass_vpn;
-                    @endphp
-                    <div class="col-12 col-md-6 tarjetainfo">
-                        <input type="text" name="" id="" value="{{ $user_vpn }}"readonly>
-                    </div>
-                    <div class="col-12 col-md-6 tarjetainfo">
-                        <input type="text" name="pass_vpn" id="pass_vpn" value="{{ $pass_vpn }}">
-                    </div>
-                </div>
-
-                <div class="row justify-content-center align-items-center tarjeta">
-                    <div class="col-12  titulo">
-                        <h2 class=""><b>Servidor</b></h2>
-                    </div>
-                    <div class="col-12 col-md-6 tarjetainfo">
-                        <input type="text" name="" id="" value="{{ $user_servidor }}" readonly>
-                    </div>
-                    <div class="col-12 col-md-6 tarjetainfo">
-                        <input type="text" name="pass_servidor" id="pass_servidor" value="{{ $pass_servidor }}">
+                    <div class="col-12 tarjetainfo" style="padding:0 12px;">
+                        <input type="text" name="pass_pc" id="pass_pc" value="{{ $pass_pc }}">
                     </div>
                 </div>
             </div>
+
+            <!-------Kiosco----------->
+            <div class="row  justify-content-between align-items-between tarjeta">
+                <div class="col-12 col-md-6 ">
+                    <div class="col-12 titulo">
+                        <h2><b>Kiosco</b></h2>
+                    </div>
+                    <div class="col-12 tarjetainfo "style="padding:0 12px;">
+                        <input type="text" name="pass_aps" id="pass_aps" value="{{ $pass_aps }}">
+                    </div>
+                </div>
+            </div>
+            <!-------correo----------->
+            <div class="tarjeta">
+                <div class="titulo">
+                    <h2><b>Correo</b></h2>
+                </div>
+                <div class="">
+                    <table class=" table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Correo</th>
+                                <th scope="col">Contraseña</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="">
+                                <td scope="row"> {{ $correo }}</td>
+                                <td>{{ $pass_correo }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!----------VPN-------------------->
+            <div class="tarjeta">
+                <div class="titulo">
+                    <h2><b>VPN</b></h2>
+                </div>
+                <div class="">
+                    <table class="table ">
+                        <thead>
+                            <tr>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Contraseña</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="">
+                                <td scope="row"> {{ $user_vpn }}</td>
+                                <td>{{ $pass_vpn }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!----------Servidor-------------------->
+            <div class="tarjeta">
+                <div class="titulo">
+                    <h2><b>Servidor</b></h2>
+                </div>
+                <div class="">
+                    <table class="table ">
+                        <thead>
+                            <tr>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Contraseña</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="">
+                                <td scope="row"> {{ $user_servidor }}</td>
+                                <td>{{ $pass_servidor }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div>
+                <h6>*Para dudas o sugerencias puedes contactar al area de sistemas a la extencion 138 y 140</h6>
+            </div>
+
         </div>
     </main>
     <!-- Bootstrap JavaScript Libraries -->

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ticket;
-use Illuminate\Container\Attributes\Storage;
+use Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -12,30 +12,66 @@ class TicketsController extends Controller
 {
     public function verTickets()
     {
+        $columnas = [
+            'users.name',
+            'users.lastName',
+            'tickets.id',
+            'tickets.created_at',
+            'tickets.Falla',
+            'tickets.Detalles',
+            'tickets.Urgencia'
+        ];
+
         if (Session::get('area') == 'SOPORTE') {
             $datos = DB::table('tickets')
-                ->where('fecha_resuelto', NULL)
-                ->orderBy('created_at', 'asc')
+                ->select($columnas)
+                ->join('users', 'tickets.Creador_id', '=', 'users.id')
+                ->where('tickets.fecha_resuelto', NULL)
+                ->orderBy('tickets.created_at', 'asc')
+                ->orderByRaw("FIELD(tickets.Urgencia,'Critica')")
+                
                 ->get();
         } else {
             $datos = DB::table('tickets')
-                ->where('Creador_id', Session::get('id'))
-                ->where('fecha_resuelto', NULL)
-                ->orderBy('created_at', 'asc')
+                ->select($columnas)
+                ->where(function ($query) {
+                    $query->where('tickets.Creador_id', '=', Session::get('id'))
+                        ->orWhere('tickets.Creador_id', '=', 1);
+                })
+                ->where('tickets.fecha_resuelto', NULL)
+                ->join('users', 'tickets.Creador_id', '=', 'users.id')
+                ->orderBy('tickets.created_at', 'asc')
+                ->orderByRaw("FIELD(tickets.Urgencia,'Critica')")
                 ->get();
         }
+
+
+        //return $datos;
         return view('verTickets')->with('datos', $datos);
     }
     public function verTicketsid($id)
     {
         $datos = DB::table('tickets')
-            ->where('id', $id)
+            ->select(
+                'users.name',
+                'users.lastName',
+                'tickets.id',
+                'tickets.created_at',
+                'tickets.fecha_resuelto',
+                'tickets.Falla',
+                'tickets.Detalles',
+                'tickets.Urgencia',
+                'tickets.Diagnostico',
+                'tickets.Archivo',
+                'tickets.Creador_id'
+            )
+            ->join('users', 'tickets.Creador_id', '=', 'users.id')
+            ->where('tickets.id', $id)
             ->get();
         if (Session::get('area') == 'SOPORTE') { //si es administrador lleva a editar
             return view('responder')->with('datos', $datos);
         } else { //si es usuario estandar te redirige a solo ver
-            //return 'otro';
-            return view('verTickets')->with('datos', $datos);
+            return view('completo')->with('datos', $datos);
         }
     }
 
@@ -43,9 +79,8 @@ class TicketsController extends Controller
     public function crearTicket()
     {
         if (Session::get('area') == 'SOPORTE') {
-
             $datos = DB::table('users')
-                ->select('id', 'name','lastName','lastName2')
+                ->select('id', 'name', 'lastName', 'lastName2')
                 ->orderBy('name', 'asc')
                 ->get();
 
@@ -58,41 +93,55 @@ class TicketsController extends Controller
 
     public function historialTicket()
     {
-        $datos = DB::table('tickets')
-            ->where('fecha_resuelto', "!=", NULL)
-            ->orderBy('fecha_resuelto', 'desc')
-            ->get();
+        $columnas = [
+            'users.name',
+            'users.lastName',
+            'tickets.id',
+            'tickets.created_at',
+            'tickets.fecha_resuelto',
+            'tickets.Falla',
+            'tickets.Detalles',
+            'tickets.Urgencia'
+        ];
+        if (Session::get('area') == 'SOPORTE') {
+            $datos = DB::table('tickets')
+                ->select($columnas)
+                ->where('tickets.fecha_resuelto', '!=', NULL)
+                ->join('users', 'tickets.Creador_id', '=', 'users.id')
+                ->orderBy('tickets.created_at', 'asc')
+                ->get();
+        } else {
+            $datos = DB::table('tickets')
+                ->select($columnas)
+                ->where(function ($query) {
+                    $query->where('tickets.Creador_id', '=', Session::get('id'))
+                        ->orWhere('tickets.Creador_id', '=', 1);
+                })
+                ->where('tickets.fecha_resuelto', '!=', NULL)
+                ->join('users', 'tickets.Creador_id', '=', 'users.id')
+                ->orderBy('tickets.created_at', 'asc')
+                ->get();
+        }
         return view('historial')->with('datos', $datos);
     }
-
-    /*public function responderTicket($id){
-
-        return 'en responder Ticket';
-        
-        /*$datos=DB::table('tickets')
-        ->where('id', $id)
-        ->get();
-        return view('responder')->$datos;
-    }*/
 
     public function store(Request $request)
     {
         $datos = $request->all();
-        
+
         if (Session::get('area') == 'SOPORTE') {
             $datos['Creador_id'] = $datos['usuario2'];
         }
-        
+
         if (isset($datos["file"])) {
-            
+
             $file = $request->file('file');
             $fecha = date_format(new \DateTime(), "Y_m_d");
-            $nombre=$datos['Creador_id']."_".$fecha."_". uniqid() .".".$file->getClientOriginalExtension();
-            $destinationPath = 'archivos/'.$datos['Creador_id']."/";
+            $nombre = $datos['Creador_id'] . "_" . $fecha . "_" . uniqid() . "." . $file->getClientOriginalExtension();
+            $destinationPath = 'archivos/' . $datos['Creador_id'] . "/";
             $file->move($destinationPath, $nombre);
-            $datos["Archivo"]=$nombre;
+            $datos["Archivo"] = $nombre;
         }
-
         Ticket::create($datos);
         return redirect('tickets');
     }
@@ -113,6 +162,7 @@ class TicketsController extends Controller
                     'fecha_resuelto' => $now,
                     'updated_at' => $now
                 ]);
+            return redirect('historial');
         } else {
             DB::table('tickets')
                 ->where('id', $datos['id'])
@@ -121,8 +171,8 @@ class TicketsController extends Controller
                     'urgencia' => $datos['prioridad'],
                     'updated_at' => $now
                 ]);
+            return redirect('tickets');
         }
-        return redirect('historial');
     }
 
     public function verTicketCompleto($id)
@@ -132,13 +182,11 @@ class TicketsController extends Controller
             ->get();
         return view('completo')->with('datos', $datos);
     }
-    
-    public function descagarArchivo($id,$file)
+
+    public function descagarArchivo($id, $file)
     {
-        $ruta=public_path('images\\'.$id."\\".$file);
+        $ruta = public_path('images\\' . $id . "\\" . $file);
         //return $ruta;
         return response()->download($ruta);
     }
-    
-
 }

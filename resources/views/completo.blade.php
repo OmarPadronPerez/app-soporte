@@ -10,7 +10,7 @@
                         @foreach ($datos as $dato)
                             <div class="card-header">
 
-                                <h4><b>Usuario: </b>{{ $dato->Creador_id }}</h4>
+                                <h4><b>Usuario: </b>{{ $dato->name . ' ' . $dato->lastName }}</h4>
 
                                 <h4><b>Falla con: </b>{{ $dato->Falla }}</h4>
 
@@ -32,7 +32,11 @@
                                 </div>
                                 <div class="col-12 col-lg-5 estado">
                                     <h5 class="card-text">
-                                        <b>Cierre: </b>{{ date('d/M/y H:i:s', strtotime($dato->fecha_resuelto)) }}
+                                        @if ($dato->fecha_resuelto)
+                                            <b>Cierre: </b>{{ date('d/M/y H:i:s', strtotime($dato->fecha_resuelto)) }}
+                                        @else
+                                            Cierre:
+                                        @endif
 
                                     </h5>
                                 </div>
@@ -45,8 +49,17 @@
                                     </p>
                                 </div>
                             </div>
+                            @if (isset($datos[0]->Archivo))
+                                <x-descargas>
+                                    @slot('file', $datos[0]->Archivo)
+                                    @slot('id', $dato->Creador_id)
+                                </x-descargas>
+                                <!--funciones para imagenes,revisar
+                                        https://www.honeybadger.io/blog/using-intervention-image-in-laravel/-->
+                            @endif
                         @endforeach
                     </div>
+
 
                     <div class="col-12">
                         <div class="mb-3">
@@ -60,14 +73,7 @@
 </textarea>
                         </div>
                     </div>
-                    @if (isset($datos[0]->Archivo))
-                        <x-descargas>
-                            @slot('file', $datos[0]->Archivo)
-                            @slot('id', $dato->Creador_id)
-                        </x-descargas>
-                        <!--funciones para imagenes,revisar
-                                            https://www.honeybadger.io/blog/using-intervention-image-in-laravel/-->
-                    @endif
+                   
                     <textarea class="form-control d-none" name="id" id="id" rows="1" hidden>{{ $datos[0]->id }}</textarea>
                     <div class="espacio" style="height: 20px"></div>
 
