@@ -60,8 +60,6 @@ function crearContra(e) {
         var passLaptop = "ABG_54321_" + iniciales;
         var nomina = inId.value;
 
-        if (nomina < 1000) nomina = "0" + nomina;
-
         var passcorreo = "MAIL_" + iniciales + "_" + nomina;
         var passVpn = "VPN_" + nomina + "_" + iniciales;
         var passServidor = "";
@@ -70,34 +68,36 @@ function crearContra(e) {
         switch (inArea.value) {
             case "SOPORTE":
                 passServidor = "ADM_" + nomina + "_" + iniciales;
+                nomina='0'+nomina;
                 break;
             case "DESARROLLO":
                 passServidor = "SIS_" + nomina + "_" + iniciales;
+                nomina='4'+nomina;
                 break;
             case "SELECCION":
                 passServidor = "SEL_" + nomina + "_" + iniciales;
+                nomina='3'+nomina;
                 break;
-            case "MANTENIMIENTO":
-                passServidor = "MAN_" + nomina + "_" + iniciales;
-                break;
+            
             case "RRHH":
                 passServidor = "RRHH_" + nomina + "_" + iniciales;
+                nomina='6'+nomina;
                 break;
             case "NOMINAS":
                 passServidor = "NOM_" + nomina + "_" + iniciales;
+                nomina='2'+nomina;
                 break;
         }
 
-        inName_user.value=usuario;
-        inCorreo.value = correo
+        inName_user.value=usuario.toLowerCase();
+        inCorreo.value = correo.toLowerCase();
         inpassCorreo.value = passcorreo;
         inLaptop.value = passLaptop;
         inAplicaciones.value = passApp;
         inVpn.value = passVpn;
         inPassServidor.value = passServidor;
-        inUserServidor.value=usuario;
+        inUserServidor.value=usuario.toLowerCase();
         inLast_name2.value=apellido2;
-
     }
 
     return 0;

@@ -47,7 +47,6 @@
                                 <option value="">Área</option>
                                 <option value="NOMINAS">NOMINAS</option>
                                 <option value="RRHH">RRHH</option>
-                                <option value="MANTENIMIENTO">MANTENIMIENTO</option>
                                 <option value="SELECCION">SELECCION</option>
                                 <option value="SOPORTE">SOPORTE</option>
                                 <option value="DESARROLLO">DESARROLLO</option>
