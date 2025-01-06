@@ -8,6 +8,7 @@
             <div class="col-12">
                 <h2>Tu Historial</h2>
             </div>
+            <hr>
             <div class="col-12">
                 @if ($datos)
                     @foreach ($datos as $dato)

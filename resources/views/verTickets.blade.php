@@ -4,26 +4,25 @@
 
 
 @section('content')
+
     <div class="container principal">
         <div class="row justify-content-center align-items-center g-2">
+
+            @if (isset($mensaje))
+                <x-mensajes>
+                    @slot('estado', $mensaje->estado)
+                    @slot('titulo', $mensaje->titulo)
+                    @slot('mensaje', $mensaje->mensaje)
+                </x-mensajes>
+            @endif
+
+
             <div class="col-12">
-                <h2>tickets abiertos</h2>
+                <h2>Tickets abiertos</h2>
             </div>
+            <hr>
 
             <div class="col-12 ">
-                @php
-                    $datos2 = [];
-                    /*for ($i = 0; $i < count($datos); $i++) {
-                        if ($datos[$i]->Urgencia == 'Critica') {
-                            array_push($datos2, $datos[$i]);
-                            unset($datos[$i]);
-                        }
-                    }
-                    for ($i = 0; $i < count($datos); $i++) {
-                        array_push($datos2, $datos[$i]);
-                    }
-                    $datos = $datos2;*/
-                @endphp
 
                 @if ($datos)
                     @foreach ($datos as $dato)

@@ -3,22 +3,22 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class correo extends Mailable
+class ticketnuevo extends Mailable
 {
     use Queueable, SerializesModels;
+    public $datos;
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($datos)
     {
-        //
+        $this->datos=$datos;
     }
 
     /**
@@ -27,7 +27,8 @@ class correo extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Correo',
+            //from: new Address('omar.padron@grupoabg.com'),//especificar emisor
+            subject: 'Nuevo ticket creado',//asunto
         );
     }
 
@@ -37,7 +38,7 @@ class correo extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.nuevoTicket',
         );
     }
 

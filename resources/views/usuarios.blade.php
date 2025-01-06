@@ -12,10 +12,12 @@
             <div class="col-10 col-lg-3">
                 <h2>Usuarios</h2>
             </div>
+            
             <div class="col-2 col-lg-1">
                 <a name="" id="" class="btn btn-primary" href="/nuevoUsuario" role="button">Nuevo</a>
             </div>
         </div>
+        <hr>
 
         <div class="row justify-content-center align-items-center">
 

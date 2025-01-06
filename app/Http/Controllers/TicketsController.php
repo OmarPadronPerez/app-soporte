@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ticket;
-use Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+
 
 class TicketsController extends Controller
 {
@@ -44,10 +44,9 @@ class TicketsController extends Controller
                 ->orderByRaw("FIELD(tickets.Urgencia,'Critica')")
                 ->get();
         }
-
-
-        //return $datos;
         return view('verTickets')->with('datos', $datos);
+        //return $datos;
+        //return view('verTickets')->with('datos', $datos)->with('mensaje',$mensaje);
     }
     public function verTicketsid($id)
     {
@@ -142,8 +141,10 @@ class TicketsController extends Controller
             $file->move($destinationPath, $nombre);
             $datos["Archivo"] = $nombre;
         }
-        Ticket::create($datos);
-        return redirect('tickets');
+        $data=Ticket::create($datos);
+
+        return redirect('/nuevo/mailTicketNuevo/'.$data->id);
+        //return redirect('tickets');
     }
 
     public function actualizar(Request $request)

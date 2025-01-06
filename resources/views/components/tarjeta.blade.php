@@ -2,8 +2,6 @@
 <link type="text/css" href="{{ asset('css/tarjetaticket.css') }}" rel="stylesheet">
 
 <a href="{{ url($redirigir) }}" class="card {{ $Urgencia }}">
-
-
     <div class="container ">
         <div class="row justify-content-between align-items-center card-header titulo">
             <div class="col-12">

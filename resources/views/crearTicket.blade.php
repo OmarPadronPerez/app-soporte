@@ -12,7 +12,7 @@
         <div class="row justify-content-center align-items-center g-2">
 
             <div class="col">
-                <h1>¿Tienes problemas? </h1>
+                <h2>¿Tienes problemas? </h2>
             </div>
             <hr>
 
