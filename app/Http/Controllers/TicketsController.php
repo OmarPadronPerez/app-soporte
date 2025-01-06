@@ -44,7 +44,7 @@ class TicketsController extends Controller
                 ->orderByRaw("FIELD(tickets.Urgencia,'Critica')")
                 ->get();
         }
-        return view('verTickets')->with('datos', $datos);
+       return view('verTickets')->with('datos', $datos);
         //return $datos;
         //return view('verTickets')->with('datos', $datos)->with('mensaje',$mensaje);
     }
@@ -163,7 +163,8 @@ class TicketsController extends Controller
                     'fecha_resuelto' => $now,
                     'updated_at' => $now
                 ]);
-            return redirect('historial');
+            //return redirect('historial');
+            return  redirect('/nuevo/mailTicketCerrado/'.$datos['id']);
         } else {
             DB::table('tickets')
                 ->where('id', $datos['id'])
@@ -173,6 +174,7 @@ class TicketsController extends Controller
                     'updated_at' => $now
                 ]);
             return redirect('tickets');
+            
         }
     }
 

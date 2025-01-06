@@ -12,7 +12,6 @@ class correosController extends Controller
 {
     public function nuevoTicket($id)
     {
-
         $datos = DB::table('tickets')
             ->select(
                 'users.name',
@@ -31,25 +30,7 @@ class correosController extends Controller
             ->get();
         $datos = $datos[0];
         //return $datos;
-
-        if ($datos) {
-            $receptor = [$datos->correo, 'chocorroloromonlvx@hotmail.com'];
-            Mail::to($receptor)
-                ->send(new ticketnuevo($datos));
-            $mensaje = [
-                'estado' => 'realizado',
-                'titulo' => 'Ticket guardado',
-                'mensaje' => 'Nos pondremos en contacto lo antes posible'
-            ];
-            return redirect('tickets')->with('mensaje', $mensaje);
-        } else {
-            $mensaje = [
-                'estado' => 'falla',
-                'titulo' => 'Ticket NO guardado',
-                'mensaje' => 'Hubo una falla al guardar tu ticket, ponte en contacto con soporte tecnico'
-            ];
-            return redirect('tickets')->with('mensaje', $mensaje);
-        }
+        return redirect('tickets');
     }
     public function cerradoTicket($id)
     {
@@ -95,7 +76,7 @@ class correosController extends Controller
             'mensaje' => 'el ticket ' . $id . ' fue cerrado con exito'
         ];
 
-        return redirect('tickets')->with('mensaje', $mensaje);;
+        return redirect('tickets')->with('mensaje', $mensaje);
     }
 
     public function fallaglobal($id)
