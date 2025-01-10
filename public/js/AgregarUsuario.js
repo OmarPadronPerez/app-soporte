@@ -59,35 +59,40 @@ function crearContra(e) {
 
         var passLaptop = "ABG_54321_" + iniciales;
         var nomina = inId.value;
-
-        var passcorreo = "MAIL_" + iniciales + "_" + nomina;
-        var passVpn = "VPN_" + nomina + "_" + iniciales;
         var passServidor = "";
-        var passApp="APP_" + nomina +"_"+ iniciales;
 
         switch (inArea.value) {
             case "SOPORTE":
-                passServidor = "ADM_" + nomina + "_" + iniciales;
                 nomina='0'+nomina;
+                passServidor = "ADM_" + nomina + "_" + iniciales;
+                
                 break;
             case "DESARROLLO":
-                passServidor = "SIS_" + nomina + "_" + iniciales;
                 nomina='4'+nomina;
+                passServidor = "SIS_" + nomina + "_" + iniciales;
+                
                 break;
             case "SELECCION":
-                passServidor = "SEL_" + nomina + "_" + iniciales;
                 nomina='3'+nomina;
+                passServidor = "SEL_" + nomina + "_" + iniciales;
+                
                 break;
             
             case "RRHH":
-                passServidor = "RRHH_" + nomina + "_" + iniciales;
                 nomina='6'+nomina;
+                passServidor = "RRHH_" + nomina + "_" + iniciales;
+                
                 break;
             case "NOMINAS":
-                passServidor = "NOM_" + nomina + "_" + iniciales;
                 nomina='2'+nomina;
+                passServidor = "NOM_" + nomina + "_" + iniciales;
+                
                 break;
         }
+        var passcorreo = "MAIL_" + iniciales + "_" + nomina;
+        var passVpn = "VPN_" + nomina + "_" + iniciales;
+        
+        var passApp="APP_" + nomina +"_"+ iniciales;
 
         inName_user.value=usuario.toLowerCase();
         inCorreo.value = correo.toLowerCase();

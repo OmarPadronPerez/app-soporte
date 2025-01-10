@@ -42,6 +42,10 @@
             margin: 0px;
 
         }
+        .titulo{
+            background-color: black;
+            color: white;
+        }
 
         .botonera div {
             text-align: center;
@@ -93,7 +97,7 @@
                         <div class="row  justify-content-between align-items-between "style="padding:0;">
 
                             <div class="col-12 col-md-6 tarjeta">
-                                <div class="col-12 ">
+                                <div class="col-12 titulo">
                                     <h2><b>Laptop</b></h2>
                                 </div>
                                 <div class="col-12 tarjetainfo" style="padding:0 12px;">
@@ -103,7 +107,7 @@
                             </div>
 
                             <div class="col-12 col-md-6 tarjeta">
-                                <div class="col-12 ">
+                                <div class="col-12 titulo">
                                     <h2><b>Kiosco</b></h2>
                                 </div>
                                 <div class="col-12 tarjetainfo "style="padding:0 12px;">
