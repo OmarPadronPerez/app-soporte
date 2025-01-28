@@ -20,7 +20,7 @@ class UsuarioController extends Controller
     public function verUsuarios()
     {
         $datos = DB::table('users')
-            ->select('id', 'name', 'lastName', 'lastName2', 'area', 'activo', 'updated_at')
+            ->select('id', 'name', 'lastName', 'lastName2', 'area', 'activo', 'updated_at','administrador')
             ->orderBy('name', 'asc')
             ->get();
 
@@ -52,6 +52,7 @@ class UsuarioController extends Controller
         $now = new \DateTime();
 
         $actualizar = array(
+            'administrador' => $datos['administrador'],
             'pass_aps' => $datos['pass_aps'],
             'pass_vpn' => $datos['pass_vpn'],
             'pass_pc' => $datos['pass_pc'],

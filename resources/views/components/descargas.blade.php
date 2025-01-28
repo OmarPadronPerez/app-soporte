@@ -15,7 +15,6 @@
         width: 100%;
     }
 </style>
-
 @php
     $previa = 'display: none';
     $estilo = 'btn-warning';
@@ -56,8 +55,6 @@
 @endphp
 
 <div class="col-12">
-
-
     <div class="mb-3 vista" style="{{ $previa }}">
         @if ($tipo == 'Imagen')
             <!--si es imagen-->
@@ -67,11 +64,9 @@
             <!--si es pfd-->
             <iframe src="{{ '/archivos' . $ruta }}" frameborder="0"></iframe>
         @endif
-
         <div class="mb-1">
-            <a name="" id="" class="btn {{ $estilo }} botonD" href="{{ '/tickets' . $ruta }}"
+            <a name="" id="" style="margin-top: 15px;" class="btn {{ $estilo }} botonD" href="{{ '/tickets' . $ruta }}"
                 role="button">Descargar <b>{{ $tipo }}</b> </a>
-
         </div>
 
     </div>

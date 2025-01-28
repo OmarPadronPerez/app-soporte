@@ -89,7 +89,7 @@ function crearContra(e) {
                 
                 break;
         }
-        var passcorreo = "MAIL_" + iniciales + "_" + nomina;
+        var passcorreo = "MAIL_"  + nomina + "_"  + iniciales
         var passVpn = "VPN_" + nomina + "_" + iniciales;
         
         var passApp="APP_" + nomina +"_"+ iniciales;

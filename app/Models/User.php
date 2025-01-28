@@ -30,6 +30,7 @@ class User extends Authenticatable
         'pass_vpn',
         'pass_pc',
         'correo',
+        'administrador',
         'pass_correo',
         'pass_servidor',
         'password',

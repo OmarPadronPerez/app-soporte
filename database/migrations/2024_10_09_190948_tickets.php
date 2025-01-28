@@ -27,7 +27,6 @@ return new class extends Migration
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('fecha_resuelto')->nullable();
 
-            //llave foranea a users->id
             
         });
     }

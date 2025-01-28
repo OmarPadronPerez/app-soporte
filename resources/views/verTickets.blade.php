@@ -10,9 +10,9 @@
 
             @if (isset($mensaje))
                 <x-mensajes>
-                    @slot('estado', $mensaje->estado)
-                    @slot('titulo', $mensaje->titulo)
-                    @slot('mensaje', $mensaje->mensaje)
+                    @slot('estado', $mensaje['estado'])
+                    @slot('titulo', $mensaje['titulo'])
+                    @slot('mensaje', $mensaje['mensaje'])
                 </x-mensajes>
             @endif
 

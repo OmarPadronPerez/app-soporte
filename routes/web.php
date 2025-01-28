@@ -30,8 +30,8 @@ Route::POST('/tckActualizar',[TicketsController::class,'actualizar'])->name('tck
 Route::GET('usuarios',[UsuarioController::class,'verUsuarios'])->middleware('auth');
 Route::GET('usuarios/{id}',[UsuarioController::class,'actUsuario'])->middleware('auth');
 Route::POST('gUsuario',[UsuarioController::class,'gUsuario'])->middleware('auth');
-Route::Get('nuevoUsuario',[UsuarioController::class,'index']);
-Route::POST('nuevoUsuario/nsStorage',[UsuarioController::class,'store'])->name('usuario.store')->middleware('auth');
+Route::Get('nuevoUsuario',[UsuarioController::class,'index'])->middleware('auth');
+Route::POST('nuevoUsuario/nsStorage',[UsuarioController::class,'store'])->name('usuario.store');
 Route::get('usuarios/{id}/pdf',[UsuarioController::class,'exportarApdf']);
 Route::get('mi_informacion',[UsuarioController::class,'mi_informacion'])->middleware('auth');
 

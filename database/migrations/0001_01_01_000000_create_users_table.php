@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('lastName')->nullable(false);
             $table->string('lastName2')->nullable();
             $table->string('area')->nullable(false);
+            $table->boolean('administrador')->nullable(false)->default(0);
             $table->string('password')->nullable(false);
             $table->string('user_vpn')->nullable();
             $table->string('pass_vpn')->nullable();

@@ -7,7 +7,7 @@
             <div class="col-12">
                 <h5><b>Usuario: </b>{{ $usuario }}</h5>
             </div>
-            <div class="col-12 col-md-3 ">
+            <div class="col-12 col-md-5 ">
 
                 <h5>
                     <b>Falla con: </b>{{ $Falla }}
@@ -17,7 +17,7 @@
             <div class="col-12 col-md-5 estado">
                 <h5 class="card-text">
                     <b>Estado:</b>
-                    @if (isset($fCierre))
+                    @if (isset($fecha_resuelto))
                         Cerrado
                     @else
                         En revision
@@ -29,19 +29,19 @@
         <div class="row justify-content-between align-items-center card-header">
             <div class="col-12 col-lg-6">
                 <h5>
-                    <b>Creacion: </b>{{ date('d/M/y H:i:s', strtotime($fCreacion)) }}
+                    <b>Creacion: </b>{{ date('d/M/y H:i', strtotime($fCreacion)) }}
                 </h5>
 
             </div>
-            @if ( isset($fCierre) )
+            @if (isset($fecha_resuelto))
                 <div class="col-12 col-md-5 estado">
                     <h5 class="card-text">
                         <b>Cierre: </b>
-                        {{ date('d/M/y H:i:s', strtotime($fCierre)) }}
+                        {{ date('d/M/y H:i', strtotime($fecha_resuelto)) }}
 
 
                     </h5>
-                </div>  
+                </div>
             @endif
 
         </div>

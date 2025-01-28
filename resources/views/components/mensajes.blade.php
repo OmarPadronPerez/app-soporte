@@ -11,15 +11,14 @@ switch ($estado) {
 }
 ?>
 
-
-<div class="alert {{ $estilo }} alert-dismissible fade show" role="alert">
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    <strong>{{$titulo}}</strong> {{ $mensaje }}
+<div class="container">
+    <div class="row justify-content-center align-items-center g-2">
+        <div class="col alert  {{ $estilo }} alert-dismissible fade show" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div>
+                <h3>{{ $titulo }}</h3>
+                {{ $mensaje }}
+            </div>
+        </div>
+    </div>
 </div>
-
-<script>
-    var alertList = document.querySelectorAll(".alert");
-    alertList.forEach(function(alert) {
-        new bootstrap.Alert(alert);
-    });
-</script>

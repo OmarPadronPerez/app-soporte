@@ -30,7 +30,7 @@ class LoginController extends Controller
         //return $credentials;
         if (Auth::attempt($credentials)) {
             $datos = DB::table('users')
-                ->select('area', 'id', 'name', 'activo')
+                ->select('area', 'id', 'name', 'activo', 'administrador')
                 ->where('user_servidor', $credentials['user_servidor'])
                 ->get();
 
@@ -39,6 +39,7 @@ class LoginController extends Controller
                 //return "si";
                 Session::put('user', $credentials['user_servidor']);
                 Session::put('nombre', $datos[0]->name);
+                Session::put('administrador', $datos[0]->administrador);
                 Session::put('area', $datos[0]->area);
                 Session::put('id', $datos[0]->id);
                 return redirect('/nuevo');

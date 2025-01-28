@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <div class="row g-1">
-                        <div class="col-12 col-md-6">
+                        <div class="col-12 col-md-4">
                             <select name="area" id="area" class="form-select" aria-label="Default select example"
                                 required>
                                 <option value="">Área</option>
@@ -53,10 +53,17 @@
                             </select>
                         </div>
 
-                        <div class=" col-12 col-md-6">
+                        <div class=" col-12 col-md-4">
                             <input type="number" class="form-control" name="id" id="id"
                                 aria-describedby="helpId" placeholder="Numero de nomina"required />
                         </div>
+                        <div class="col-12 col-md-4">
+                            <input type="checkbox" class="btn-check col" id="administrador" name="administrador" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="administrador">Administrador</label><br>
+
+
+                        </div>
+
                     </div>
                 </div>
 
